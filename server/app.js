@@ -52,6 +52,7 @@ app.use(
 )
 require('./passport')(app)
 
+app.use('/api', require('./routes/food'))
 app.use('/api', require('./routes/auth'))
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
@@ -63,6 +64,7 @@ app.use('/api/*', (req, res, next) => {
 
 // For any other routes, redirect to the index.html file of React
 app.get('*', (req, res) => {
+  console.log('hi')
   res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
 
