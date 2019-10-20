@@ -1,0 +1,5 @@
+//NOTE registration info
+hide "encryptedPassword" before sending the JSON (it's a security risk)
+LOG IN THIS USER
+"req.logIn()" is a Passport method that calls "serializeUser()"
+(that saves the USER ID in the session)

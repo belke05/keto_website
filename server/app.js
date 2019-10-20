@@ -41,19 +41,21 @@ app.use(cookieParser())
 // Example: http://localhost:5000/favicon.ico => Display "~/client/build/favicon.ico"
 app.use(express.static(path.join(__dirname, '../client/build')))
 
-// Enable authentication using session + passport
+// object saved by backend for a single user
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'irongenerator',
+    secret: process.env.SESSION_SECRET || 'supersecretsesh',
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 )
+
+// initializing passport for our app
 require('./passport')(app)
 
 app.use('/api', require('./routes/food'))
-app.use('/api', require('./routes/auth'))
+app.use('/user-management', require('./routes/auth'))
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {

@@ -2,37 +2,32 @@ const express = require('express')
 const passport = require('passport')
 const router = express.Router()
 const User = require('../models/User')
-
+const { createUser } = require('../passport/authenticationFunctions')
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt')
-const bcryptSalt = 10
 
-router.post('/signup', (req, res, next) => {
-  const { username, password, name } = req.body
-  if (!username || !password) {
-    res.status(400).json({ message: 'Indicate username and password' })
+router.post('/register', (req, res, next) => {
+  const { username, password, first_name, last_name, email } = req.body
+  if (!username || !password || !first_name || !last_name || !email) {
+    res.status(400).json({ message: 'Indicate username,password and name' })
     return
   }
   User.findOne({ username })
     .then(userDoc => {
       if (userDoc !== null) {
-        res.status(409).json({ message: 'The username already exists' })
+        res.status(409).json({ message: 'Username taken' })
         return
       }
-      const salt = bcrypt.genSaltSync(bcryptSalt)
-      const hashPass = bcrypt.hashSync(password, salt)
-      const newUser = new User({ username, password: hashPass, name })
-      return newUser.save()
-    })
-    .then(userSaved => {
-      // LOG IN THIS USER
-      // "req.logIn()" is a Passport method that calls "serializeUser()"
-      // (that saves the USER ID in the session)
-      req.logIn(userSaved, () => {
-        // hide "encryptedPassword" before sending the JSON (it's a security risk)
-        userSaved.password = undefined
-        res.json(userSaved)
-      })
+      createUser(req.body) //NOTE registration info
+        .then(createdUser => {
+          req.logIn(createdUser, () => {
+            createdUser.password = undefined
+            res.json(createdUser)
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     })
     .catch(err => next(err))
 })
