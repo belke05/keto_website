@@ -54,7 +54,7 @@ app.use(
 // initializing passport for our app
 require('./passport')(app)
 
-app.use('/api', require('./routes/food'))
+app.use('/product-management', require('./routes/products'))
 app.use('/user-management', require('./routes/auth'))
 
 // For any routes that starts with "/api", catch 404 and forward to error handler

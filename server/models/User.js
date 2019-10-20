@@ -4,10 +4,19 @@ const Schema = mongoose.Schema
 const userSchema = new Schema(
   {
     username: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    shoppingCart: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Product' }],
-    favourites: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Product' }],
+    email: { type: String },
+    password: { type: String },
+    last_name: { type: String },
+    first_name: { type: String },
+    avatar_url: { type: String },
+    _shoppingCart: [
+      {
+        _product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+        quantity: { type: Number, default: 0 },
+        timeOfAddition: { type: Date, default: Date.now },
+      },
+    ],
+    _favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
   },
   {
     timestamps: true,

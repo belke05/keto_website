@@ -6,8 +6,15 @@ const { createUser } = require('../passport/authenticationFunctions')
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt')
 
-router.post('/register', (req, res, next) => {
-  const { username, password, first_name, last_name, email } = req.body
+router.post('/user', (req, res, next) => {
+  const {
+    username,
+    password,
+    first_name,
+    last_name,
+    email,
+    avatar_url,
+  } = req.body
   if (!username || !password || !first_name || !last_name || !email) {
     res.status(400).json({ message: 'Indicate username,password and name' })
     return
@@ -34,7 +41,6 @@ router.post('/register', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   const { username, password } = req.body
-
   // first check to see if there's a document with that username
   User.findOne({ username })
     .then(userDoc => {
