@@ -3,3 +3,30 @@ hide "encryptedPassword" before sending the JSON (it's a security risk)
 LOG IN THIS USER
 "req.logIn()" is a Passport method that calls "serializeUser()"
 (that saves the USER ID in the session)
+
+//NOTE JWT tokens
+JWT used to require that certain endpoints 
+havea valid JWT in their request 
+google and facebool modules are used 
+to provide endpoints to authenticate with them
+and return a JWT 
+
+//NOTE local startegy explainer 
+inside of localStrategy.js we define the strategy 
+this one we require inside index.js in Passport
+this index.js is used in app.js
+which makes that we can use it in our 
+auth login route
+
+Authentication mechanisms, 
+known as strategies, 
+are packaged as individual modules. 
+Applications can choose which strategies to employ, 
+without creating unnecessary dependencies.
+
+.authenticate is called within route handler 
+rather then being used as middleware so we have access
+to the res and req objects 
+
+cb can use provided arguments to handle to authentication 
+req.login will establish a session 

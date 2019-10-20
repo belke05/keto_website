@@ -1,22 +1,8 @@
-// --------------------
-// Definition of variables
 $primary: #32c3ff;
 
-// ----------------------------------------
-// To install Boostrap:
-// 1) Run in the client folder: $ npm i bootstrap
-// 2) Import bootstrap with the following line
-// @import '../node_modules/bootstrap/scss/bootstrap.scss';
-//
-// To install Reactstrap:
-// 1) Run in the client folder: $ npm i reactstrap
-// 2) Go to the official documentation and take some examples: https://reactstrap.github.io/
-// import { Button } from 'reactstrap';
-// <Button color="danger">Danger!</Button>
-// ----------------------------------------
+//NOTE reactstrap and bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 
-// --------------------
-// Style reusable for all components
 body {
   margin: 0;
   padding: 0;
@@ -59,24 +45,6 @@ body {
 
     a.active {
       font-weight: bold;
-    }
-  }
-
-  .App-title {
-    font-size: 1.5em;
-  }
-
-  .App-intro {
-    font-size: large;
-  }
-
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
     }
   }
 }

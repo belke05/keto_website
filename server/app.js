@@ -1,6 +1,5 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
-
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -51,7 +50,7 @@ app.use(
   })
 )
 
-// initializing passport for our app
+//NOTE why this
 require('./passport')(app)
 
 app.use('/product-management', require('./routes/products'))

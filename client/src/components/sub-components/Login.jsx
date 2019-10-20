@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import api from '../../api/api'
+import user_management from '../../api/user-management'
 import { useForm } from '../../hooks'
 
 export default function Login(props) {
@@ -10,7 +10,7 @@ export default function Login(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    api
+    user_management
       .login(formValues.username, formValues.password)
       .then(result => {
         console.log('SUCCESS!')
