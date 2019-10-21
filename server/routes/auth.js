@@ -75,12 +75,12 @@ router.get(
   }
 )
 
-router.get('/login-facebook', (req, res, next) => {})
+router.get('/login-facebook', passport.authenticate('facebook'))
 router.get(
   '/login-facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res, next) => {
-    res.redirect('/')
+    res.redirect('/profile')
   }
 )
 

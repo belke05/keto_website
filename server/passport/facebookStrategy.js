@@ -2,18 +2,20 @@ const FacebookStrategy = require('passport-facebook')
 const passport = require('passport')
 const User = require('../models/User')
 const chalk = require('chalk')
+const { FACEBOOK } = require('../../config')
 let user = {}
 
 passport.use(
   new FacebookStrategy(
     // options
     {
-      clientID: process.env.FACEBOOK_CLIENTID,
-      clientSecret: process.env.FACEBOOK_CLIENTSECRET,
+      clientID: FACEBOOK.clientID,
+      clientSecret: FACEBOOK.clientSecret,
       callbackURL: '/user-management/login-facebook/callback',
     },
     // this gets send to callback url
     (accessToken, refreshToken, profile, cb) => {
+      console.log('here')
       console.log(chalk.blue(JSON.stringify(profile)))
       // User.findOne({})
       user = { ...profile }
