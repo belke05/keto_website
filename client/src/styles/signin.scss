@@ -1,0 +1,47 @@
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  max-width: 20%;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-icon {
+  width: 15px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.btn-txt {
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.menu-btn {
+  padding: 12px 15px;
+  display: inline-block;
+}
+
+.menu-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.login-btn {
+  padding: 5px 20px;
+  border-radius: 3px;
+}
+
+.social-login-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

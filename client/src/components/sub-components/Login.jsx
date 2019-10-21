@@ -29,7 +29,12 @@ export default function Login(props) {
         Username: <input type="text" {...getInputProps('username')} /> <br />
         Password: <input type="password" {...getInputProps('password')} />
         <br />
-        <button>Login</button>
+        <button
+          className="login-btn btn"
+          style={{ backgroundColor: '#1A8FDD' }}
+        >
+          Login
+        </button>
       </form>
       {message && <div className="info info-danger">{message}</div>}
     </div>

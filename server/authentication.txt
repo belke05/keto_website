@@ -30,3 +30,9 @@ to the res and req objects
 
 cb can use provided arguments to handle to authentication 
 req.login will establish a session 
+
+//NOTE way of getting user info (safer)
+way of getting user info thanks to
+passport serializer we get it based upon session id
+password is already made null in serializer
+req.user.password = null

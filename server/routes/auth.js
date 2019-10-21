@@ -3,8 +3,7 @@ const passport = require('passport')
 const router = express.Router()
 const User = require('../models/User')
 const { createUser } = require('../passport/authenticationFunctions')
-// Bcrypt to encrypt passwords
-const bcrypt = require('bcrypt')
+const { putUserInfoInRequest } = require('../middlewares')
 
 router.post('/user', (req, res, next) => {
   const {
@@ -51,58 +50,50 @@ router.post('/login', (req, res, next) => {
       res.status(401).json(failureDetails)
       return
     }
-
+    // with req.login we establish a session
     req.login(theUser, err => {
       if (err) {
         res.status(500).json({ message: 'Something went wrong' })
         return
       }
-
       // We are now logged in (notice req.user)
+      // hide sensitive info
+      req.user.password = null
+      req.user._id = null
       res.json(req.user)
     })
   })(req, res, next)
 })
 
-router.post('/login-google', (req, res, next) => {})
+router.get('/login-google', (req, res, next) => {})
+router.get(
+  '/login-google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res, next) => {
+    // req.login() to establish a session
+    res.redirect('/')
+  }
+)
 
-router.post('/login-facebook', (req, res, next) => {})
-
-router.post('/login-no-passport', (req, res, next) => {
-  const { username, password } = req.body
-  // first check to see if there's a document with that username
-  User.findOne({ username })
-    .then(userDoc => {
-      // "userDoc" will be empty if the username is wrong (no document in database)
-      if (!userDoc) {
-        // create an error object to send to our error handler with "next()"
-        next(new Error('Incorrect username '))
-        return
-      }
-
-      // second check the password
-      // "compareSync()" will return false if the "password" is wrong
-      if (!bcrypt.compareSync(password, userDoc.password)) {
-        // create an error object to send to our error handler with "next()"
-        next(new Error('Password is wrong'))
-        return
-      }
-
-      // LOG IN THIS USER
-      // "req.logIn()" is a Passport method that calls "serializeUser()"
-      // (that saves the USER ID in the session)
-      req.logIn(userDoc, () => {
-        // hide "encryptedPassword" before sending the JSON (it's a security risk)
-        userDoc.password = undefined
-        res.json(userDoc)
-      })
-    })
-    .catch(err => next(err))
-})
+router.get('/login-facebook', (req, res, next) => {})
+router.get(
+  '/login-facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  (req, res, next) => {
+    res.redirect('/')
+  }
+)
 
 router.get('/logout', (req, res) => {
+  console.log(req.sessionID, req.session)
   req.logout()
   res.json({ message: 'You are out!' })
+})
+
+//NOTE way of getting user info via sessionId (safer)
+router.get('/users', (req, res, next) => {
+  req.user._id = null
+  res.json({ user: req.user })
 })
 
 module.exports = router

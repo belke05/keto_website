@@ -59,7 +59,13 @@ export default function Signup(props) {
           onChange={handleInputChange}
         />{' '}
         <br />
-        <button onClick={e => handleClick(e)}>Signup</button>
+        <button
+          className="login-btn btn"
+          style={{ backgroundColor: '#1A8FDD' }}
+          onClick={e => handleClick(e)}
+        >
+          Signup
+        </button>
       </form>
       {state.message && <div className="info info-danger">{state.message}</div>}
     </div>

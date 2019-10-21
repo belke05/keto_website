@@ -2,6 +2,8 @@ const passport = require('passport')
 const User = require('../models/User')
 
 // user id is serialized in the session
+// so with each new req we can use it to
+// attach user to the req object
 passport.serializeUser((loggedInUser, cb) => {
   cb(null, loggedInUser._id)
 })

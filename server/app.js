@@ -41,6 +41,11 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../client/build')))
 
 // object saved by backend for a single user
+//  credentials will only pass through once
+// after that a session is set up
+// every next request will contain a cookie
+// identifying the session instead
+// of credentials
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'supersecretsesh',
@@ -65,7 +70,8 @@ app.use('/api/*', (req, res, next) => {
 
 // For any other routes, redirect to the index.html file of React
 app.get('*', (req, res) => {
-  console.log('hi')
+  // we can see the user info on the req object
+  // thanks to the serializer
   res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
 

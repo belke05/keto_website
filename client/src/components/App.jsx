@@ -4,17 +4,14 @@ import Home from './pages/Home'
 import RegisterLogin from './pages/RegisterLogin'
 import Profile from './pages/Profile'
 // this is a context so that we can access the user his info everywhere
-import UserProvider from '../contexts/UserProvider'
 
 export default function App() {
   return (
     <div className="App">
       <Switch>
-        <UserProvider>
-          <Route path="/" exact component={Home} />
-          <Route path="/register-login" component={RegisterLogin} />
-          <Route path="/profile" component={Profile} />
-        </UserProvider>
+        <Route path="/" exact component={Home} />
+        <Route path="/register-login" component={RegisterLogin} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </div>
   )
