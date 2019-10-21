@@ -24,12 +24,15 @@ export default function RegisterLogin(props) {
         </a>
         <a
           onClick={e => {
-            user_management.loginFacebook()
+            window.open(
+              'http://localhost:5000/user-management/login-facebook',
+              '_self'
+            )
           }}
-          href="#"
           className="btn login-btn"
           style={{ backgroundColor: '#3B5899', margin: 5, display: 'block' }}
           title="login with facebook"
+          href="http://localhost:5000/user-management/login-facebook"
         >
           <img src={FacebookIcon} alt="facebook-icon" className="btn-icon" />
           <span className="btn-txt">Login</span>

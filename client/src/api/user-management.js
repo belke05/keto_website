@@ -5,7 +5,7 @@ console.log(process.env.NODE_ENV)
 const service = axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? '/api'
+      ? '/user-management'
       : `http://${window.location.hostname}:5000/user-management`,
   withCredentials: true,
 })
@@ -69,7 +69,7 @@ export default {
     return service
       .get('/login-facebook')
       .then(res => {
-        console.log()
+        console.log(res)
       })
       .catch(errHandler)
   },
