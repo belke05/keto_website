@@ -68,14 +68,18 @@ router.post('/login', (req, res, next) => {
 router.get('/login-google', (req, res, next) => {})
 router.get(
   '/login-google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { scope: ['profile'] }),
   (req, res, next) => {
     // req.login() to establish a session
+    console.log('hi')
     res.redirect('/')
   }
 )
 
+console.log('here')
 router.get('/login-facebook', passport.authenticate('facebook'))
+// when we setup facebookstrategy it gets attached to the
+//passport object
 router.get(
   '/login-facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),

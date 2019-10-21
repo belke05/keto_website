@@ -3,6 +3,7 @@ const bcryptSalt = 10
 const User = require('../models/User')
 
 async function createUser(user) {
+  console.log('here')
   const { username, email, password, first_name, last_name } = user
   const salt = bcrypt.genSaltSync(bcryptSalt)
   const hashPass = bcrypt.hashSync(password, salt)
