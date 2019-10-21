@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Login from '../sub-components/Login'
 import Signup from '../sub-components/Signup'
+import user_management from '../../api/user-management'
 
 export default function RegisterLogin(props) {
-  console.log(sessionStorage)
-  console.log(sessionStorage.getItem('user'))
-  console.log(localStorage)
-  console.log(localStorage.user)
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    user_management.getUserInfo().then(res => {
+      console.log('response', res)
+    })
+  }, [])
   return (
     <div>
       <Login passedHistory={props.history} />

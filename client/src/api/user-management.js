@@ -47,7 +47,7 @@ export default {
 
   // This method returns the user from the localStorage
   // Be careful, the value is the one when the user logged in for the last time
-  getLocalStorageUser() {
+  getSessionStorageUser() {
     return JSON.parse(sessionStorage.getItem('user'))
   },
 
@@ -60,7 +60,6 @@ export default {
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
         sessionStorage.setItem('user', JSON.stringify(res.data))
-        localStorage.setItem('user', JSON.stringify(res.data))
         return res.data
       })
       .catch(errHandler)
@@ -69,5 +68,16 @@ export default {
   logout() {
     sessionStorage.removeItem('user')
     return service.get('/logout')
+  },
+
+  getUserInfo() {
+    return service
+      .get('/users')
+      .then(res => {
+        return res.data
+      })
+      .catch(err => {
+        console.log(err, 'error getting user info')
+      })
   },
 }

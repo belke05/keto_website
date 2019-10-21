@@ -43,3 +43,9 @@ function ThemedButton() {
     </button>
   );
 }
+
+//NOTE sessionstorage or route 
+we have 2 options to get user info 
+in this instance we will use the sessionstorage where we saved
+the user to to set up our context so that 
+we can access user info anywhere in the app 
