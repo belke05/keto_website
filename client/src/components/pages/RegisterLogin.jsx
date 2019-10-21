@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom'
 import Login from '../sub-components/Login'
 import Signup from '../sub-components/Signup'
 
-export default function RegisterLogin() {
+export default function RegisterLogin(props) {
+  console.log(sessionStorage)
+  console.log(sessionStorage.getItem('user'))
+  console.log(localStorage)
+  console.log(localStorage.user)
   return (
     <div>
-      <Login />
+      <Login passedHistory={props.history} />
       <Signup />
       <button
         type="button"

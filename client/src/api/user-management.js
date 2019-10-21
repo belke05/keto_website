@@ -33,7 +33,7 @@ export default {
       .post('/user', formData)
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
-        localStorage.setItem('user', JSON.stringify(res.data))
+        sessionStorage.setItem('user', JSON.stringify(res.data))
         return res.data
       })
       .catch(errHandler)
@@ -42,13 +42,13 @@ export default {
   // This method is synchronous and returns true or false
   // To know if the user is connected, we just check if we have a value for localStorage.getItem('user')
   isLoggedIn() {
-    return localStorage.getItem('user') != null
+    return sessionStorage.getItem('user') != null
   },
 
   // This method returns the user from the localStorage
   // Be careful, the value is the one when the user logged in for the last time
   getLocalStorageUser() {
-    return JSON.parse(localStorage.getItem('user'))
+    return JSON.parse(sessionStorage.getItem('user'))
   },
 
   login(username, password) {
@@ -59,6 +59,7 @@ export default {
       })
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
+        sessionStorage.setItem('user', JSON.stringify(res.data))
         localStorage.setItem('user', JSON.stringify(res.data))
         return res.data
       })
@@ -66,7 +67,7 @@ export default {
   },
 
   logout() {
-    localStorage.removeItem('user')
+    sessionStorage.removeItem('user')
     return service.get('/logout')
   },
 }

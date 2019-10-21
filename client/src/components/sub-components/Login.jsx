@@ -13,8 +13,9 @@ export default function Login(props) {
     user_management
       .login(formValues.username, formValues.password)
       .then(result => {
-        console.log('SUCCESS!')
-        props.history.push('/') // Redirect to the home page
+        console.log('SUCCESS LOGIN!')
+        console.log(props, props.historypush, 'here')
+        props.passedHistory.push('/') // Redirect to the home page
       })
       .catch(err => setMessage(err.toString()))
   }

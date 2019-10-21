@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import api from '../../api/api'
+import user_management from '../../api/user-management'
 
 export default function Signup(props) {
   const [state, setState] = useState({
@@ -23,7 +23,7 @@ export default function Signup(props) {
       name: state.name,
       password: state.password,
     }
-    api
+    user_management
       .signup(data)
       .then(result => {
         console.log('SUCCESS!')
