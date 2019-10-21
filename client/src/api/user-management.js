@@ -65,6 +65,15 @@ export default {
       .catch(errHandler)
   },
 
+  loginFacebook() {
+    return service
+      .get('/login-facebook')
+      .then(res => {
+        console.log()
+      })
+      .catch(errHandler)
+  },
+
   logout() {
     sessionStorage.removeItem('user')
     return service.get('/logout')

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Login from '../sub-components/Login'
 import Signup from '../sub-components/Signup'
-// import user_management from '../../api/user-management'
+import user_management from '../../api/user-management'
 // import { Link } from 'react-router-dom'
 import GoogleIcon from '../../assets/images/google.png'
 import FacebookIcon from '../../assets/images/facebook.png'
@@ -23,7 +23,10 @@ export default function RegisterLogin(props) {
           <span className="btn-txt">Login</span>
         </a>
         <a
-          href="user-management/login-facebook"
+          onClick={e => {
+            user_management.loginFacebook()
+          }}
+          href="#"
           className="btn login-btn"
           style={{ backgroundColor: '#3B5899', margin: 5, display: 'block' }}
           title="login with facebook"
