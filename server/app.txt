@@ -1,2 +1,4 @@
 //NOTE why this
 making sure passport and sessions can be used
+auto goes to index file executes app function
+makes sure we use a deserializer

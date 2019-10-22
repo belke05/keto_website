@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Login from '../sub-components/Login'
 import Signup from '../sub-components/Signup'
-import user_management from '../../api/user-management'
+// import user_management from '../../api/user-management'
 // import { Link } from 'react-router-dom'
 import GoogleIcon from '../../assets/images/google.png'
 import FacebookIcon from '../../assets/images/facebook.png'
@@ -11,7 +11,7 @@ export default function RegisterLogin(props) {
   return (
     <div>
       <Login passedHistory={props.history} />
-      <Signup />
+      <Signup passedHistory={props.history} />
       <div className="social-login-buttons">
         <a
           href="http://localhost:5000/user-management/login-google"

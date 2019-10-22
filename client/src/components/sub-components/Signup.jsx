@@ -4,7 +4,9 @@ import user_management from '../../api/user-management'
 export default function Signup(props) {
   const [state, setState] = useState({
     username: '',
-    name: '',
+    email: '',
+    first_name: '',
+    last_name: '',
     password: '',
     message: null,
   })
@@ -20,14 +22,16 @@ export default function Signup(props) {
     e.preventDefault()
     let data = {
       username: state.username,
-      name: state.name,
+      email: state.email,
       password: state.password,
+      first_name: state.first_name,
+      last_name: state.last_name,
     }
     user_management
-      .signup(data)
+      .register(data)
       .then(result => {
         console.log('SUCCESS!')
-        props.history.push('/') // Redirect to the home page
+        props.passedHistory.push('/profile') // Redirect to the home page
       })
       .catch(err => setState({ message: err.toString() }))
   }
@@ -43,11 +47,27 @@ export default function Signup(props) {
           onChange={handleInputChange}
         />{' '}
         <br />
-        Name:{' '}
+        email:{' '}
         <input
           type="text"
-          value={state.name}
-          name="name"
+          value={state.email}
+          name="email"
+          onChange={handleInputChange}
+        />{' '}
+        <br />
+        First Name:{' '}
+        <input
+          type="text"
+          value={state.first_name}
+          name="first_name"
+          onChange={handleInputChange}
+        />{' '}
+        <br />
+        Last Name:{' '}
+        <input
+          type="text"
+          value={state.last_name}
+          name="last_name"
           onChange={handleInputChange}
         />{' '}
         <br />
@@ -67,6 +87,7 @@ export default function Signup(props) {
           Signup
         </button>
       </form>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
       {state.message && <div className="info info-danger">{state.message}</div>}
     </div>
   )

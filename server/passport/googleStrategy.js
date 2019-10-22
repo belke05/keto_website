@@ -13,8 +13,7 @@ passport.use(
     },
     // this gets send to callback url
     async (accessToken, refreshToken, profile, done) => {
-      console.log('here')
-      console.log(chalk.green(JSON.stringify(profile)))
+      console.log(chalk.green(JSON.stringify(profile)), 'google info')
       const foundUser = await User.findOne({ google_id: profile.id })
       if (!foundUser) {
         const newUser = await new User({

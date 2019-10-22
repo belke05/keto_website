@@ -24,13 +24,8 @@ export default {
 
   // register a user with his avatar
   register(userInfo) {
-    const formData = new FormData()
-    const userInfoKeys = Object.keys(userInfo)
-    userInfoKeys.forEach(key => {
-      formData.append(`${key}`, userInfo[`${key}`])
-    })
     return service
-      .post('/user', formData)
+      .post('/user', userInfo)
       .then(res => {
         // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
         sessionStorage.setItem('user', JSON.stringify(res.data))
@@ -65,14 +60,14 @@ export default {
       .catch(errHandler)
   },
 
-  loginFacebook() {
-    return service
-      .get('/login-facebook')
-      .then(res => {
-        console.log(res)
-      })
-      .catch(errHandler)
-  },
+  // loginFacebook() {
+  //   return service
+  //     .get('/login-facebook')
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  //     .catch(errHandler)
+  // },
 
   logout() {
     sessionStorage.removeItem('user')

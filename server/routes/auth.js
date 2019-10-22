@@ -1,9 +1,10 @@
 const express = require('express')
 const passport = require('passport')
+const path = require('path')
 const router = express.Router()
 const User = require('../models/User')
 const { createUser } = require('../passport/authenticationFunctions')
-const { putUserInfoInRequest } = require('../middlewares')
+const chalk = require('chalk')
 
 router.post('/user', (req, res, next) => {
   const {
@@ -14,6 +15,7 @@ router.post('/user', (req, res, next) => {
     email,
     avatar_url,
   } = req.body
+  console.log(req.body)
   if (!username || !password || !first_name || !last_name || !email) {
     res.status(400).json({ message: 'Indicate username,password and name' })
     return
@@ -75,9 +77,11 @@ router.get(
   '/login-google/callback',
   passport.authenticate('google', { scope: ['profile'] }),
   (req, res, next) => {
-    // req.login() to establish a session
-    console.log('google login')
-    res.redirect('/')
+    console.log(chalk.red(req.user), 'req.user thanks to passport')
+    req.logIn(req.user, () => {
+      createdUser.password = undefined
+    })
+    res.redirect(`${process.env.CLIENT_URL}/users/${req.user._id}`)
   }
 )
 
@@ -89,7 +93,7 @@ router.get(
   '/login-facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res, next) => {
-    res.redirect('/profile')
+    res.redirect(`${process.env.CLIENT_URL}/users/${req.user._id}`)
   }
 )
 
