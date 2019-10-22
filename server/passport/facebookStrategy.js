@@ -8,8 +8,8 @@ passport.use(
   new FacebookStrategy(
     // options
     {
-      clientID: FACEBOOK.clientID,
-      clientSecret: FACEBOOK.clientSecret,
+      clientID: process.env.FACEBOOK_CLIENTID,
+      clientSecret: process.env.FACEBOOK_CLIENTSECRET,
       callbackURL: '/user-management/login-facebook/callback',
     },
     // this gets send to callback url
@@ -22,9 +22,11 @@ passport.use(
           username: profile.displayName,
           facebook_id: profile.id,
         }).save()
+        done(null, newUser)
         console.log('new facebook user created', newUser)
       } else {
         console.log('user already exists', foundUser)
+        done(null, foundUser)
       }
     }
   )

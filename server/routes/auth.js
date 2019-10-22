@@ -65,13 +65,18 @@ router.post('/login', (req, res, next) => {
   })(req, res, next)
 })
 
-router.get('/login-google', (req, res, next) => {})
+router.get(
+  '/login-google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  })
+)
 router.get(
   '/login-google/callback',
   passport.authenticate('google', { scope: ['profile'] }),
   (req, res, next) => {
     // req.login() to establish a session
-    console.log('hi')
+    console.log('google login')
     res.redirect('/')
   }
 )

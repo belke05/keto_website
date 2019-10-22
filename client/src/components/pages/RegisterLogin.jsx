@@ -14,7 +14,7 @@ export default function RegisterLogin(props) {
       <Signup />
       <div className="social-login-buttons">
         <a
-          href="user-management/login-google"
+          href="http://localhost:5000/user-management/login-google"
           className="btn login-btn"
           style={{ backgroundColor: '#CB4024', margin: 5, display: 'block' }}
           title="login with google"
@@ -23,12 +23,12 @@ export default function RegisterLogin(props) {
           <span className="btn-txt">Login</span>
         </a>
         <a
-          onClick={e => {
-            window.open(
-              'http://localhost:5000/user-management/login-facebook',
-              '_self'
-            )
-          }}
+          // onClick={e => {
+          //   window.open(
+          //     'http://localhost:5000/user-management/login-facebook',
+          //     '_self'
+          //   )
+          // }}
           className="btn login-btn"
           style={{ backgroundColor: '#3B5899', margin: 5, display: 'block' }}
           title="login with facebook"
