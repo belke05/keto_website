@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Login from '../sub-components/Login'
 import Signup from '../sub-components/Signup'
 // import user_management from '../../api/user-management'
@@ -7,7 +7,6 @@ import GoogleIcon from '../../assets/images/google.png'
 import FacebookIcon from '../../assets/images/facebook.png'
 
 export default function RegisterLogin(props) {
-  const [user, setUser] = useState({})
   return (
     <div>
       <Login passedHistory={props.history} />

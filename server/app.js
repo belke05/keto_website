@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 // of credentials
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'supersecretsesh',
+    secret: process.env.SESSION_SECRET || 'jkjuujjjhggggg',
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),

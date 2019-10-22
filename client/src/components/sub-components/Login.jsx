@@ -15,7 +15,7 @@ export default function Login(props) {
       .then(result => {
         console.log('SUCCESS LOGIN!')
         console.log(props, props.historypush, 'here')
-        props.passedHistory.push('/') // Redirect to the home page
+        props.passedHistory.push('/profile') // Redirect to the home page
       })
       .catch(err => setMessage(err.toString()))
   }

@@ -79,9 +79,10 @@ router.get(
   (req, res, next) => {
     console.log(chalk.red(req.user), 'req.user thanks to passport')
     req.logIn(req.user, () => {
-      createdUser.password = undefined
+      console.log(req.user, 'jjjj')
+      req.user.password = undefined
+      res.redirect(`${process.env.CLIENT_URL}/users/${req.user._id}`)
     })
-    res.redirect(`${process.env.CLIENT_URL}/users/${req.user._id}`)
   }
 )
 
@@ -104,7 +105,7 @@ router.get('/logout', (req, res) => {
 })
 
 //NOTE way of getting user info via sessionId (safer)
-router.get('/users', (req, res, next) => {
+router.get('/users/:userId', (req, res, next) => {
   req.user._id = null
   res.json({ user: req.user })
 })

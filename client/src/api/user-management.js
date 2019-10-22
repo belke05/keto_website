@@ -69,6 +69,17 @@ export default {
   //     .catch(errHandler)
   // },
 
+  setSessionStorageUser(userId) {
+    return service
+      .get(`/users/${userId}`)
+      .then(res => {
+        // If we have localStorage.getItem('user') saved, the application will consider we are loggedin
+        sessionStorage.setItem('user', JSON.stringify(res.data))
+        return res.data.user
+      })
+      .catch(errHandler)
+  },
+
   logout() {
     sessionStorage.removeItem('user')
     return service.get('/logout')
