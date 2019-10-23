@@ -45,11 +45,8 @@ export default function MainNavBar(props) {
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Login />
-
                 <Dropdown.Divider />
-
                 <SocialLogin></SocialLogin>
-
                 <Dropdown.Item style={{ textAlign: 'center' }}>
                   <Link to="/register-login">no account? sign-up here</Link>
                 </Dropdown.Item>
