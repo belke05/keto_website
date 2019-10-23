@@ -15,7 +15,7 @@ export default function Login(props) {
       .then(result => {
         console.log('SUCCESS LOGIN!')
         console.log(props, props.historypush, 'here')
-        props.passedHistory.push('/profile') // Redirect to the home page
+        // props.passedHistory.push('/profile') // Redirect to the home page
       })
       .catch(err => setMessage(err.toString()))
   }
@@ -23,14 +23,22 @@ export default function Login(props) {
   const [message, setMessage] = useState(null)
 
   return (
-    <div className="Login">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        Username: <input type="text" {...getInputProps('username')} /> <br />
-        Password: <input type="password" {...getInputProps('password')} />
+    <div className="login">
+      <form onSubmit={handleSubmit} className="login-form">
+        <input
+          placeholder="username"
+          type="text"
+          {...getInputProps('username')}
+        />{' '}
+        <br />
+        <input
+          placeholder="password"
+          type="password"
+          {...getInputProps('password')}
+        />
         <br />
         <button
-          className="login-btn btn"
+          className="login-btn btn-one"
           style={{ backgroundColor: '#1A8FDD' }}
         >
           Login

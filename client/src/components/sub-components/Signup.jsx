@@ -80,7 +80,7 @@ export default function Signup(props) {
         />{' '}
         <br />
         <button
-          className="login-btn btn"
+          className="login-btn btn-one"
           style={{ backgroundColor: '#1A8FDD' }}
           onClick={e => handleClick(e)}
         >
