@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import user_management from '../../api/user-management'
 import { Nav, Navbar, NavDropdown, Dropdown, NavItem } from 'react-bootstrap'
 import keto_logo from '../../assets/images/keto_logo.png'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../contexts/UserContext'
 import SocialLogin from './SocialLogin'
 import Logout from './Logout'
 import Login from './Login'
@@ -12,6 +13,7 @@ export default function MainNavBar(props) {
   useEffect(() => {
     setLoginCheck(user_management.isLoggedIn())
   })
+  const user = useContext(UserContext)
   return (
     <>
       <Navbar
@@ -36,9 +38,11 @@ export default function MainNavBar(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto"></Nav>
           <Nav>
-            <Nav.Link>
-              <Logout />
-            </Nav.Link>
+            {user && (
+              <Nav.Link>
+                <Logout />
+              </Nav.Link>
+            )}
             <Dropdown drop="left">
               <Dropdown.Toggle>
                 <i className="fa fa-user" aria-hidden="true"></i>

@@ -9,6 +9,6 @@ export default function UserContextProvider({ children }) {
   const [user, setUser] = useState(null)
   useEffect(() => {
     setUser(user_management.getSessionStorageUser())
-  })
+  }, [])
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>
 }
