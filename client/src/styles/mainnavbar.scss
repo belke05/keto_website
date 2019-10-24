@@ -27,9 +27,21 @@
 
 .shop-name {
   color: white;
+  font-size: 1.3rem;
 }
 
 .shop-name:hover {
   color: white;
   text-decoration: none;
+}
+
+.btn-logout {
+  color: #5a6669;
+  font-weight: bold;
+}
+
+.login-form > input {
+  border: none;
+  padding: 5px;
+  background-color: #7b766c47;
 }

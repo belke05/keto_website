@@ -7,6 +7,7 @@ export default function Logout() {
   return (
     <div>
       <button
+        className="btn-logout"
         onClick={e => {
           user_management.logout()
           dispatch({

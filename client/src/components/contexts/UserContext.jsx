@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext } from 'react'
+import chalk from 'chalk'
 
 export const UserContext = createContext({})
 // creates user context object with provider and
@@ -19,7 +20,9 @@ export default function UserContextProvider({
 // normally we would just use use context every where
 export const useUserValue = () => {
   console.log(
-    'function that will call use context and because we use a reducer this will return our state and dispatch function'
+    chalk.magenta(
+      'dispatch function that will call use context and because we use a reducer this will return our state and dispatch function'
+    )
   )
   return useContext(UserContext)
 }

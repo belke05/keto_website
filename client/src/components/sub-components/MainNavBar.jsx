@@ -9,6 +9,7 @@ import Login from './Login'
 
 export default function MainNavBar(props) {
   const [{ user }, dispatch] = useUserValue()
+  console.log(props, 'props')
   return (
     <div className="main-nav-wrapper">
       <Navbar
@@ -40,7 +41,13 @@ export default function MainNavBar(props) {
                 <Logout />
               </Nav.Link>
             )}
-            <Dropdown drop="left">
+            <Nav.Link eventKey={2} href="#memes">
+              <i class="fas fa-shopping-cart"></i>
+            </Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              <i class="fas fa-heart"></i>
+            </Nav.Link>
+            <Dropdown drop={'down'} alignRight={true}>
               <Dropdown.Toggle>
                 <i className="fa fa-user" aria-hidden="true"></i>
               </Dropdown.Toggle>
@@ -54,13 +61,21 @@ export default function MainNavBar(props) {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               )}
+              {user && (
+                <Dropdown.Menu>
+                  <Dropdown.Item style={{ textAlign: 'center' }}>
+                    <Link to="/order-history">my orders</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item style={{ textAlign: 'center' }}>
+                    <Link to="/register-login">account settings</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item style={{ textAlign: 'center' }}>
+                    <Logout />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              )}
             </Dropdown>
-            <Nav.Link eventKey={2} href="#memes">
-              <i class="fas fa-shopping-cart"></i>
-            </Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              <i class="fas fa-heart"></i>
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

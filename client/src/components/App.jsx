@@ -31,6 +31,8 @@ export default function App() {
         <MainNavBar />
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/home" exact component={Home} />
+          <Route path="/users" component={Home} />
           <Route path="/register-login" exact component={Register} />
           <Route path="/profile" component={Profile} />
         </Switch>
