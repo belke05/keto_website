@@ -15,7 +15,7 @@ passport.deserializeUser((userIdFromSession, done) => {
   // now and attach the user to req.user
   User.findById(userIdFromSession)
     .then(userDocument => {
-      console.log(userDocument, '--------------------')
+      console.log(userDocument, 'is the user deserialized')
       userDocument.password = null
       done(null, userDocument)
     })
