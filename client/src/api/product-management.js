@@ -23,21 +23,21 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getProducts(body) {
+  getProducts() {
     return service
       .get('/products')
       .then(res => res.data)
       .catch(errHandler)
   },
 
-  getOneProduct(body, productId) {
+  getOneProduct(productId) {
     return service
       .get(`/products/${productId}`)
       .then(res => res.data)
       .catch(errHandler)
   },
 
-  addProduct() {
+  addProduct(body) {
     return service
       .post('/products', body)
       .then(res => res.data)

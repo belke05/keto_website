@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar, Nav, Form, Button, FormControl } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default function BottomNavBar() {
   return (
@@ -7,20 +8,26 @@ export default function BottomNavBar() {
       <Nav className="mr-auto">
         <Nav.Link href="#features">
           <div className="bottom-nav-icon-title">
-            <i className="fas fa-drumstick-bite"></i>
-            <span>Food</span>
+            <Link to="/food">
+              <i className="fas fa-drumstick-bite"></i>
+              <span>Food</span>
+            </Link>
           </div>
         </Nav.Link>
         <Nav.Link href="#pricing">
           <div className="bottom-nav-icon-title">
-            <i className="fas fa-cocktail"></i>
-            <span>Drinks</span>
+            <Link to="/drinks">
+              <i className="fas fa-cocktail"></i>
+              <span>Drinks</span>
+            </Link>
           </div>
         </Nav.Link>
         <Nav.Link href="#pricing">
           <div className="bottom-nav-icon-title">
-            <i className="fas fa-pills"></i>
-            <span>Sups</span>
+            <Link to="/sups">
+              <i className="fas fa-pills"></i>
+              <span>Sups</span>
+            </Link>
           </div>
         </Nav.Link>
       </Nav>

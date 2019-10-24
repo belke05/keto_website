@@ -8,7 +8,70 @@ const Product = require('../models/Product')
 
 require('../configs/database')
 
-let products = []
+let products = [
+  {
+    name: 'avocado',
+    description: 'new avocado',
+    ingredients: '',
+    nutritional_value: {
+      cal: 100,
+      fat: 10,
+      carbs: 20,
+      protein: 30,
+      sugar: 30,
+      fiber: 30,
+      salt: 30,
+    },
+    category: 'food',
+    tags: ['cheap'],
+    picture_url: '',
+    price: 200.1,
+    rating: 5,
+    sales: 1,
+  },
+  {
+    name: 'avocado',
+    description: 'new avocado',
+    ingredients: '',
+    nutritional_value: {
+      cal: 100,
+      fat: 10,
+      carbs: 20,
+      protein: 30,
+      sugar: 30,
+      fiber: 30,
+      salt: 30,
+    },
+    category: 'food',
+    tags: ['cheap'],
+    picture_url: '',
+    price: 200.1,
+    rating: 5,
+    sales: 1,
+  },
+  {
+    name: 'avocado',
+    description: 'new avocado',
+    ingredients: '',
+    nutritional_value: {
+      cal: 100,
+      fat: 10,
+      carbs: 20,
+      protein: 30,
+      sugar: 30,
+      fiber: 30,
+      salt: 30,
+    },
+    category: 'food',
+    tags: ['cheap'],
+    picture_url: '',
+    price: 200.1,
+    rating: 5,
+    sales: 1,
+  },
+]
+
+deleteAllThenInsertAll()
 
 async function deleteAllThenInsertAll() {
   await Product.deleteMany()
