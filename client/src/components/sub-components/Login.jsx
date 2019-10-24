@@ -9,7 +9,8 @@ export default function Login(props) {
     username: '',
     password: '',
   })
-  const [{ user }, dispatch] = useUserValue() // we will use dispatch in this to set our user ing the global state
+  const [{ user }, dispatch] = useUserValue()
+  // we will use dispatch in this to set our user in the global state
   function handleSubmit(e) {
     e.preventDefault()
     user_management
@@ -20,8 +21,6 @@ export default function Login(props) {
           type: 'userLogin',
           newUser: logedInUser,
         })
-        // console.log(props, props.historypush, 'here')
-        // props.passedHistory.push('/profile') // Redirect to the home page
       })
       .catch(err => setMessage(err.toString()))
   }

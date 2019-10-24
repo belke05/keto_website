@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import user_management from '../../api/user-management'
+import { useUserValue } from '../contexts/UserContext'
 
 export default function Signup(props) {
   const [state, setState] = useState({
@@ -30,8 +31,8 @@ export default function Signup(props) {
     user_management
       .register(data)
       .then(result => {
-        console.log('SUCCESS!')
-        props.passedHistory.push('/profile') // Redirect to the home page
+        console.log('signup success!')
+        props.passedHistory.push('/home') // Redirect to the home page
       })
       .catch(err => setState({ message: err.toString() }))
   }

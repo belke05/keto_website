@@ -8,7 +8,7 @@ import BottomNavBar from '../sub-components/BottomNavBar'
 export default function Home(props) {
   const [{ user }, dispatch] = useUserValue()
   useEffect(() => {
-    if (props.match.url === '/users') {
+    if (props.match.url === '/users' || props.match.url === '/home') {
       user_management
         .setSessionStorageUser()
         .then(savedUser => {
@@ -21,7 +21,7 @@ export default function Home(props) {
           console.log('error after social login', err)
         })
     } // in case there is a social login we need to save the user in the session  and put him
-    // as the user of the context
+    // as the user of the context and in case of signup we use home url meaning we will have to do the same
     return () => {}
   }, [])
 
