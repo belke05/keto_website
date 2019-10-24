@@ -1,21 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react'
-import user_management from '../../api/user-management'
 import { Nav, Navbar, NavDropdown, Dropdown, NavItem } from 'react-bootstrap'
 import keto_logo from '../../assets/images/keto_logo.png'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext'
+import { useUserValue } from '../contexts/UserContext'
 import SocialLogin from './SocialLogin'
 import Logout from './Logout'
 import Login from './Login'
 
 export default function MainNavBar(props) {
-  const [loginCheck, setLoginCheck] = useState(false)
-  useEffect(() => {
-    setLoginCheck(user_management.isLoggedIn())
-  })
-  const user = useContext(UserContext)
+  const [{ user }, dispatch] = useUserValue()
   return (
-    <>
+    <div className="main-nav-wrapper">
       <Navbar
         collapseOnSelect
         expand="lg"
@@ -32,7 +27,9 @@ export default function MainNavBar(props) {
           ></Navbar.Brand>
         </Link>
         <Nav.Link eventKey={2} href="#">
-          <Link to="/">Keto-Shop</Link>
+          <Link to="/">
+            <b className="shop-name">Keto-Shop</b>
+          </Link>
         </Nav.Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -47,14 +44,16 @@ export default function MainNavBar(props) {
               <Dropdown.Toggle>
                 <i className="fa fa-user" aria-hidden="true"></i>
               </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Login />
-                <Dropdown.Divider />
-                <SocialLogin></SocialLogin>
-                <Dropdown.Item style={{ textAlign: 'center' }}>
-                  <Link to="/register-login">no account? sign-up here</Link>
-                </Dropdown.Item>
-              </Dropdown.Menu>
+              {!user && (
+                <Dropdown.Menu>
+                  <Login />
+                  <Dropdown.Divider />
+                  <SocialLogin></SocialLogin>
+                  <Dropdown.Item style={{ textAlign: 'center' }}>
+                    <Link to="/register-login">no account? sign-up here</Link>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              )}
             </Dropdown>
             <Nav.Link eventKey={2} href="#memes">
               <i class="fas fa-shopping-cart"></i>
@@ -65,6 +64,6 @@ export default function MainNavBar(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </>
+    </div>
   )
 }

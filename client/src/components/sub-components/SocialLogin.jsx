@@ -8,7 +8,7 @@ export default function SocialLogin(props) {
       <a
         href="http://localhost:5000/user-management/login-google"
         className="btn-one login-btn"
-        style={{ backgroundColor: '#CB4024', margin: 5, display: 'block' }}
+        style={{ backgroundColor: '#CB4024', margin: 5 }}
         title="login with google"
       >
         <img src={GoogleIcon} alt="google-icon" className="btn-icon" />
@@ -22,7 +22,7 @@ export default function SocialLogin(props) {
         //   )
         // }}
         className="btn-one login-btn"
-        style={{ backgroundColor: '#3B5899', margin: 5, display: 'block' }}
+        style={{ backgroundColor: '#3B5899', margin: 5 }}
         title="login with facebook"
         href="http://localhost:5000/user-management/login-facebook"
       >

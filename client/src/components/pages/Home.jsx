@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import user_management from '../../api/user-management'
-
 import keto_background from '../../assets/images/keto_background.jpg'
 
 export default function Home() {

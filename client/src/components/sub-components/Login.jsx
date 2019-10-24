@@ -1,20 +1,26 @@
-import React, { useState, createContext } from 'react'
+import React, { useState } from 'react'
 import user_management from '../../api/user-management'
 import { useForm } from '../../hooks'
+import { useUserValue } from '../contexts/UserContext'
+import chalk from 'chalk'
 
 export default function Login(props) {
   const { formValues, getInputProps } = useForm({
     username: '',
     password: '',
   })
-
+  const [{ user }, dispatch] = useUserValue() // we will use dispatch in this to set our user ing the global state
   function handleSubmit(e) {
     e.preventDefault()
     user_management
       .login(formValues.username, formValues.password)
-      .then(result => {
-        console.log('SUCCESS LOGIN!')
-        console.log(props, props.historypush, 'here')
+      .then(logedInUser => {
+        console.log(chalk.green('SUCCESS LOGIN!'))
+        dispatch({
+          type: 'userLogin',
+          newUser: logedInUser,
+        })
+        // console.log(props, props.historypush, 'here')
         // props.passedHistory.push('/profile') // Redirect to the home page
       })
       .catch(err => setMessage(err.toString()))

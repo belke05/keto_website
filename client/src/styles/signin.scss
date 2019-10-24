@@ -7,7 +7,15 @@ button {
 .btn-one {
   text-decoration: none;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   // max-width: 20%;
+}
+
+.btn-one:hover {
+  text-decoration: none;
+  color: gray;
 }
 
 .btn:hover {
