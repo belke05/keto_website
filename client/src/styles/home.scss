@@ -6,3 +6,23 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.jumbotron-wrapper {
+  position: absolute;
+  text-align: left;
+  top: 10%;
+  left: 5%;
+  color: #32c3ff;
+  text-shadow: 2px 2px 3px white;
+}
+
+.jumbotron-wrapper > p {
+  font-family: 'Nunito', sans-serif;
+}
+
+#learn-more {
+  color: white;
+}
+.jumbotron-wrapper > h1 {
+  font-family: 'Roboto', sans-serif;
+}

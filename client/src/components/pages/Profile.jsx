@@ -1,26 +1,18 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import user_management from '../../api/user-management'
-import { UserContext } from '../contexts/UserContext'
 
-export default function Profile(props) {
+export default function Profile() {
+  const [userData, setUserData] = useState()
   useEffect(() => {
-    // if it is a local login then it is already in the session
-    // otherwise a a user session needs to still be created based upon
-    // user id
-    if (props.match.params) {
-      user_management.setSessionStorageUser()
-    }
+    const storedUser = user_management.getSessionStorageUser()
+    console.log(storedUser)
+    setUserData(storedUser)
+    return () => {}
   }, [])
-
-  const user = useContext(UserContext)
-  console.log(user, 'user here')
-
+  console.log(userData)
   return (
     <div>
       <div>profile page</div>
-      <div>
-        <h1>hi there</h1>
-      </div>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Jumbotron, Button } from 'react-bootstrap'
 import user_management from '../../api/user-management'
 import keto_background from '../../assets/images/keto_background.jpg'
 import { useUserValue } from '../contexts/UserContext'
@@ -31,6 +32,21 @@ export default function Home(props) {
         backgroundImage: `url(${keto_background})`,
       }}
     >
+      <div className="jumbotron-wrapper">
+        <Jumbotron>
+          <h1>Deliciously healthy food and drinks!</h1>
+          <p>
+            We at Keto-Shop believe that the ketogenic diet is your way to a
+            healthier and balanced life. <br /> Without having to sacrifice
+            bacon.
+          </p>
+          <p>
+            <Button variant="primary" id="learn-more">
+              Learn more
+            </Button>
+          </p>
+        </Jumbotron>
+      </div>
       <BottomNavBar />
     </div>
   )
