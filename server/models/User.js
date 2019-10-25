@@ -19,6 +19,7 @@ const userSchema = new Schema(
       },
     ],
     _favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+    _orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
   },
   {
     timestamps: true,

@@ -6,9 +6,12 @@ const Product = require('../models/Product')
 // can then use to create a req.file
 
 // get all the products
-router.get('/products', (req, res, next) => {
+router.get('/products/:category', (req, res, next) => {
   console.log('here')
-  res.json({ msg: 'helloooooo' })
+  const category = req.params.category
+  Product.find({ category })
+    .then(foundProducts => res.json(foundProducts))
+    .catch(err => console.log(err))
 })
 
 // get a single product

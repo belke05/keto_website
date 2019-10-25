@@ -165,52 +165,52 @@ let products = [
   },
 ]
 
-const typesOfProducts = [
-  'avocado',
-  'coconut',
-  'egg',
-  'bacon',
-  'nuts',
-  'cheese',
-  'jerky',
-]
+// const typesOfProducts = [
+//   'avocado',
+//   'coconut',
+//   'egg',
+//   'bacon',
+//   'nuts',
+//   'cheese',
+//   'jerky',
+// ]
 
-let food = []
-let i
-let foodSpecifics = []
+// let food = []
+// let i
+// let foodSpecifics = []
 
-typesOfProducts.forEach(product => {
-  axios
-    .get(
-      `https://api.spoonacular.com/food/products/search?query=${product}&maxCarbs=10&apiKey=51026ee59aa0402f977feb9578175477`
-    )
-    .then(res => {
-      i++
-      console.log(res.data.products)
-      food.concat(res.data.products)
-      if (i == typesOfProducts.length) {
-        getspecificinfo
-      }
-    })
-})
+// typesOfProducts.forEach(product => {
+//   axios
+//     .get(
+//       `https://api.spoonacular.com/food/products/search?query=${product}&maxCarbs=10&apiKey=51026ee59aa0402f977feb9578175477`
+//     )
+//     .then(res => {
+//       i++
+//       console.log(res.data.products)
+//       food.concat(res.data.products)
+//       if (i == typesOfProducts.length) {
+//         getspecificinfo
+//       }
+//     })
+// })
 
-const getspecificinfo = () => {
-  food.forEach(item => {
-    axios
-      .get(`https://api.spoonacular.com/food/products/${item.id}`)
-      .then(res => {
-        console.log(res.data)
-      })
-  })
-}
+// const getspecificinfo = () => {
+//   food.forEach(item => {
+//     axios
+//       .get(`https://api.spoonacular.com/food/products/${item.id}`)
+//       .then(res => {
+//         console.log(res.data)
+//       })
+//   })
+// }
 
-axios
-  .get(
-    'https://api.spoonacular.com/food/products/search?query=avocado&maxCarbs=10&apiKey=51026ee59aa0402f977feb9578175477'
-  )
-  .then(res => {
-    console.log(res.data)
-  })
+// axios
+//   .get(
+//     'https://api.spoonacular.com/food/products/search?query=avocado&maxCarbs=10&apiKey=51026ee59aa0402f977feb9578175477'
+//   )
+//   .then(res => {
+//     console.log(res.data)
+//   })
 
 async function deleteAllThenInsertAll() {
   await Product.deleteMany()
@@ -218,3 +218,4 @@ async function deleteAllThenInsertAll() {
   mongoose.disconnect()
   return 'good seeds'
 }
+deleteAllThenInsertAll()

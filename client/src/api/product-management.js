@@ -23,9 +23,9 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getProducts() {
+  getProducts(type) {
     return service
-      .get('/products')
+      .get(`/products/${type}`)
       .then(res => res.data)
       .catch(errHandler)
   },
