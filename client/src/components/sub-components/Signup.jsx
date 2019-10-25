@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import clsx from 'clsx'
+import Input from '@material-ui/core/Input'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import user_management from '../../api/user-management'
-import { useUserValue } from '../contexts/UserContext'
+import { NONAME } from 'dns'
 
 export default function Signup(props) {
   const [state, setState] = useState({
@@ -11,6 +14,12 @@ export default function Signup(props) {
     password: '',
     message: null,
   })
+
+  // const styles = theme => ({
+  //   underline: {
+  //     color: 'green',
+  //   },
+  // })
 
   function handleInputChange(event) {
     setState({
@@ -30,55 +39,66 @@ export default function Signup(props) {
     }
     user_management
       .register(data)
-      .then(result => {
+      .then(user => {
         console.log('signup success!')
         props.passedHistory.push('/home') // Redirect to the home page
       })
       .catch(err => setState({ message: err.toString() }))
   }
   return (
-    <div className="Signup">
-      <h2>Signup</h2>
+    <div className="signup">
+      <h2>Welcome to keto_shop!</h2>
       <form>
-        Username:{' '}
-        <input
+        <Input
           type="text"
           value={state.username}
           name="username"
           onChange={handleInputChange}
-        />{' '}
+          placeholder="username"
+          required
+          classes={{ root: 'signup-input', underline: 'signup-underline' }}
+        ></Input>
         <br />
-        email:{' '}
-        <input
-          type="text"
+        <Input
+          type="email"
           value={state.email}
           name="email"
           onChange={handleInputChange}
-        />{' '}
+          placeholder="email"
+          required
+          classes={{ root: 'signup-input', underline: 'signup-underline' }}
+        ></Input>
         <br />
-        First Name:{' '}
-        <input
+        <Input
           type="text"
           value={state.first_name}
           name="first_name"
           onChange={handleInputChange}
-        />{' '}
+          placeholder="first name"
+          classes={{ root: 'signup-input', underline: 'signup-underline' }}
+          required
+        ></Input>
         <br />
-        Last Name:{' '}
-        <input
+        <Input
+          onChange={handleInputChange}
           type="text"
           value={state.last_name}
           name="last_name"
-          onChange={handleInputChange}
-        />{' '}
+          placeholder="last name"
+          classes={{ root: 'signup-input', underline: 'signup-underline' }}
+          required
+        ></Input>
         <br />
-        Password:{' '}
-        <input
+        <Input
+          onChange={handleInputChange}
           type="password"
           value={state.password}
           name="password"
-          onChange={handleInputChange}
-        />{' '}
+          placeholder="password"
+          classes="signup-input"
+          classes={{ root: 'signup-input', underline: 'signup-underline' }}
+          required
+        ></Input>
         <br />
         <button
           className="login-btn btn-one"

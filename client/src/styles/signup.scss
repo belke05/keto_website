@@ -1,0 +1,28 @@
+.MuiInput::after {
+  border-bottom: 2px solid #00b4fe;
+}
+
+.register-page {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup,
+.signup form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.signup-input::after {
+  border-bottom: 2px solid #32c3ff !important;
+}
+.signup-input {
+  color: white !important;
+  background-color: gray;
+  padding: 5px;
+}

@@ -5,7 +5,7 @@ import Signup from '../sub-components/Signup'
 
 export default function Register(props) {
   return (
-    <div>
+    <div className="register-page">
       <Signup passedHistory={props.history} />
     </div>
   )

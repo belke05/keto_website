@@ -92,7 +92,7 @@ router.get('/login-facebook', passport.authenticate('facebook'))
 //passport object
 router.get(
   '/login-facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  passport.authenticate('facebook', { failureRedirect: '/' }),
   (req, res, next) => {
     res.redirect(`${process.env.CLIENT_URL}/users/${req.user._id}`)
   }
