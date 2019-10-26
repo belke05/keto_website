@@ -13,7 +13,7 @@ export default function FilterMenu({
   function sortDrinks() {
     let sortedDrinks
     if (filterState.sortPrice) {
-      sortedDrinks = drinkValue.sort(priceSort(a, b))
+      sortedDrinks = drinkValue.sort((a, b) => priceSort(a, b))
     } else if (true) {
     }
   }

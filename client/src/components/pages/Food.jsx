@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import product_management from '../../api/product-management'
+import OneProduct from '../sub-components/OneProduct'
 
 export default function Food(props) {
   const [food, setFood] = useState([])
@@ -15,8 +16,8 @@ export default function Food(props) {
   // }
   return (
     <div className="product-display">
-      {food.map(item => {
-        return <img src={item.picture_url}></img>
+      {food.map((item, i) => {
+        return <OneProduct product={item} key={i} />
       })}
     </div>
   )

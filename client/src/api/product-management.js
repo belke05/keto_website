@@ -44,16 +44,16 @@ export default {
       .catch(errHandler)
   },
 
-  editProduct(body) {
+  editProduct(productId, data) {
     return service
-      .put(`/products/${productId}`, body)
+      .put(`/products/${productId}`, data)
       .then(res => res.data)
       .catch(errHandler)
   },
 
-  deleteProduct(body) {
+  deleteProduct(productId, data) {
     return service
-      .delete(`/products/${productId}`, body)
+      .delete(`/products/${productId}`, data)
       .then(res => res.data)
       .catch(errHandler)
   },

@@ -65,8 +65,11 @@ export default function Drink(props) {
         setDrinkValue={setDrinks}
         drinkValue={drinks}
       />
-      {drinks.filter(drink => {
+      {/* {drinks.filter(drink => {
         return globalFilter(drink) ? <OneProduct product={drink} /> : null
+      })} */}
+      {drinks.map(drink => {
+        return <OneProduct product={drink} />
       })}
     </div>
   )
