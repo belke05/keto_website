@@ -167,6 +167,46 @@ let products = [
 
 const queryWords = ['low carb', 'no sugar drink', 'nuts']
 
+queryOnWords(queryWords)
+
+function queryOnWords(queryInputs) {
+  const max_carbs = 10
+  let allProducts = []
+  queryInputs.forEach(query => {
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/search?query=${queryInputs}&maxCarbs=${max_carbs}&apiKey=${process.env.SPOON_KEY}`
+      )
+      .then(res => {
+        i++
+        allProducts.concat(res.data.products)
+        // if we have all query responses
+        if (i == typesOfProducts.length) {
+          queryById(allProducts)
+        }
+      })
+  })
+}
+
+function queryById(foundProducts) {
+  let productsToSeed = []
+  foundProducts.forEach(product => {
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/${product.id}&apiKey=${process.env.SPOON_KEY}`
+      )
+      .then(res => {
+        const foundProduct = res.data
+        productsToSeed.push(foundProduct)
+        if (productsToSeed.length === foundProducts.length)
+          formatResults(productsToSeed)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
+}
+
 function formatResults(foundProducts) {
   let products_to_seed = []
   let non_empty_seeds
@@ -193,63 +233,12 @@ function formatResults(foundProducts) {
   non_empty_seeds = products_to_seed.filter(
     value => JSON.stringify(value) !== '{}'
   )
-  return non_empty_articles
+  deleteAllThenInsertAll(non_empty_seeds)
 }
 
-function queryOnWords(queryInputs) {
-  queryInputs.forEach(query => {
-    axios
-      .get(
-        `https://api.spoonacular.com/food/products/search?query=${queryInputs}&maxCarbs=10&apiKey=${process.env.SPOON_KEY}`
-      )
-      .then(res => {
-        i++
-        console.log(res.data.products)
-        food.concat(res.data.products)
-        if (i == typesOfProducts.length) {
-          getspecificinfo
-        }
-      })
-  })
-}
-
-// typesOfProducts.forEach(product => {
-//   axios
-//     .get(
-//       `https://api.spoonacular.com/food/products/search?query=${product}&maxCarbs=10&apiKey=51026ee59aa0402f977feb9578175477`
-//     )
-//     .then(res => {
-//       i++
-//       console.log(res.data.products)
-//       food.concat(res.data.products)
-//       if (i == typesOfProducts.length) {
-//         getspecificinfo
-//       }
-//     })
-// })
-
-// const getspecificinfo = () => {
-//   food.forEach(item => {
-//     axios
-//       .get(`https://api.spoonacular.com/food/products/${item.id}`)
-//       .then(res => {
-//         console.log(res.data)
-//       })
-//   })
-// }
-
-// axios
-//   .get(
-//     'https://api.spoonacular.com/food/products/search?query=avocado&maxCarbs=10&apiKey=51026ee59aa0402f977feb9578175477'
-//   )
-//   .then(res => {
-//     console.log(res.data)
-//   })
-
-async function deleteAllThenInsertAll() {
+async function deleteAllThenInsertAll(seeds) {
   await Product.deleteMany()
-  await Product.insertMany(products)
+  await Product.insertMany(seeds)
   mongoose.disconnect()
-  return 'good seeds'
+  return 'database was fed'
 }
-deleteAllThenInsertAll()
