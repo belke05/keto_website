@@ -46,7 +46,14 @@ export default {
 
   editProduct(body) {
     return service
-      .put('/products', body)
+      .put(`/products/${productId}`, body)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  deleteProduct(body) {
+    return service
+      .delete(`/products/${productId}`, body)
       .then(res => res.data)
       .catch(errHandler)
   },

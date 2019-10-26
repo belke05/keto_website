@@ -60,15 +60,6 @@ export default {
       .catch(errHandler)
   },
 
-  // loginFacebook() {
-  //   return service
-  //     .get('/login-facebook')
-  //     .then(res => {
-  //       console.log(res)
-  //     })
-  //     .catch(errHandler)
-  // },
-
   setSessionStorageUser(userId) {
     return service
       .get(`/users/${userId}`)
