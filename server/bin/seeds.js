@@ -165,19 +165,53 @@ let products = [
   },
 ]
 
-// const typesOfProducts = [
-//   'avocado',
-//   'coconut',
-//   'egg',
-//   'bacon',
-//   'nuts',
-//   'cheese',
-//   'jerky',
-// ]
+const queryWords = ['low carb', 'no sugar drink', 'nuts']
 
-// let food = []
-// let i
-// let foodSpecifics = []
+function formatResults(foundProducts) {
+  let products_to_seed = []
+  let non_empty_seeds
+  foundProducts.forEach(product => {
+    let seed_product = {
+      name: product.title,
+      description: product.generatedText,
+      ingredients: product.ingredientList.split(';'),
+      nutritional_value: {
+        calories: product.nutrition.calories,
+        fat: product.nutrition.fat,
+        protein: product.nutrition.protein,
+        carbs: product.nutrition.carbs,
+      },
+      category: product.breadcrumbs.includes('drink') ? 'drink' : 'food',
+      tags: product.badges,
+      picture_url: product.images[1] ? product.images[1] : product.images[0],
+      price: product.price == 0 ? 1.5 : product.price,
+      rating: Math.floor(Math.random() * 5),
+      sales: Math.floor(Math.random() * 5),
+    }
+    products_to_seed.push(seed_product)
+  })
+  non_empty_seeds = products_to_seed.filter(
+    value => JSON.stringify(value) !== '{}'
+  )
+  return non_empty_articles
+}
+
+function queryOnWords(queryInputs) {
+  queryInputs.forEach(query => {
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/search?query=${queryInputs}&maxCarbs=10&apiKey=${process.env.SPOON_KEY}`
+      )
+      .then(res => {
+        i++
+        console.log(res.data.products)
+        food.concat(res.data.products)
+        if (i == typesOfProducts.length) {
+          getspecificinfo
+        }
+      })
+  })
+}
 
 // typesOfProducts.forEach(product => {
 //   axios

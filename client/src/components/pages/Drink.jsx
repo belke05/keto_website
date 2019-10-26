@@ -29,7 +29,10 @@ export default function Drink(props) {
     })
   }, [])
   function filteringRange(product) {
-    if (product.nutritional_value.cal[] < filter.nutritional_value.cal) {
+    if (
+      product.nutritional_value.cal > filter.nutritional_value.cal[0] &&
+      product.nutritional_value.cal < filter.nutritional_value.cal[1]
+    ) {
       return true
     }
     return false
@@ -46,15 +49,24 @@ export default function Drink(props) {
     }
     return false
   }
-  function globalFilter(product){
-    return filteringRange(product) && filteringTagsIngredients(product) && filteringPriceRating(product) ? true : false 
+  function globalFilter(product) {
+    return filteringRange(product) &&
+      filteringTagsIngredients(product) &&
+      filteringPriceRating(product)
+      ? true
+      : false
   }
 
   return (
     <div className="product-display">
-      <FilterMenu setFilterValue={setFilter} filterValue={filter} setDrinkValue={setDrinks} drinkValue={drinks}/>
+      <FilterMenu
+        setFilterValue={setFilter}
+        filterValue={filter}
+        setDrinkValue={setDrinks}
+        drinkValue={drinks}
+      />
       {drinks.filter(drink => {
-        return globalFilter(drink)? <OneProduct product={drink}/> : null
+        return globalFilter(drink) ? <OneProduct product={drink} /> : null
       })}
     </div>
   )

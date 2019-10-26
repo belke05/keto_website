@@ -6,15 +6,16 @@ export default function FilterMenu({
   setDrinkValue,
   drinkValue,
 }) {
-  const [filterState, setFilterState] = useState({sortPrice: {sortPriceAscending: false, sortPriceDescending: false}, sortRating: {sortRatingAscending: false, sortRatingDescending: false}})
+  const [filterState, setFilterState] = useState({
+    sortPrice: { sortPriceAscending: false, sortPriceDescending: false },
+    sortRating: { sortRatingAscending: false, sortRatingDescending: false },
+  })
   function sortDrinks() {
     let sortedDrinks
-    if(filterState.sortPrice){
+    if (filterState.sortPrice) {
       sortedDrinks = drinkValue.sort(priceSort(a, b))
-    } else if () {
-
+    } else if (true) {
     }
-    
   }
   function priceSort(a, b) {
     return filterState.sortPriceAscending
