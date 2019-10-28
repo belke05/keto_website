@@ -27,7 +27,8 @@ const queryWords = [
   // 'protein based',
   // 'supplements',
   // 'muscle',
-  'organic protein',
+  // 'organic protein',
+  'vegan drink',
 ]
 
 queryOnWords(queryWords)

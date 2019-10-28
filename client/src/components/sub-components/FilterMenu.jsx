@@ -1,22 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import RangeSlider from '../sub-components/Sliders'
+import ReviewFilter from '../sub-components/RadioButton'
+import CategoryFilter from '../sub-components/CategoryFilter'
 
-export default function FilterMenu({
-  setFilterValue,
-  filterValue,
-  setDrinkValue,
-  drinkValue,
-}) {
-  const [filterState, setFilterState] = useState({
-    sortPrice: { sortPriceAscending: false, sortPriceDescending: false },
-    sortRating: { sortRatingAscending: false, sortRatingDescending: false },
-  })
-  function sortDrinks() {
-    let sortedDrinks
-    if (filterState.sortPrice) {
-      sortedDrinks = drinkValue.sort((a, b) => priceSort(a, b))
-    } else if (true) {
-    }
-  }
+export default function FilterMenu({ filterState, setFilterState }) {
   function priceSort(a, b) {
     return filterState.sortPriceAscending
       ? a - b
@@ -25,5 +12,19 @@ export default function FilterMenu({
       : null
   }
   function ratingSort() {}
-  return <div></div>
+
+  function priceFilter({ price }) {}
+  return (
+    <section className="filter-nav">
+      <RangeSlider
+        setFilter={setFilterState}
+        filterValues={filterState}
+        className="space-top"
+      />
+
+      <ReviewFilter />
+
+      <CategoryFilter />
+    </section>
+  )
 }

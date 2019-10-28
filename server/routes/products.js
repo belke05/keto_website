@@ -8,7 +8,7 @@ const Product = require('../models/Product')
 // get all the products
 router.get('/products/:category', (req, res, next) => {
   console.log('here')
-  const category = req.params.category
+  const category = req.params.category.replace('s', '')
   Product.find({ category })
     .then(foundProducts => res.json(foundProducts))
     .catch(err => console.log(err))

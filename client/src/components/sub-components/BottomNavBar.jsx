@@ -8,7 +8,7 @@ export default function BottomNavBar() {
       <Nav className="mr-auto">
         <Nav.Link href="#features">
           <div className="bottom-nav-icon-title">
-            <Link to="/food">
+            <Link to="/products/food">
               <i className="fas fa-drumstick-bite"></i>
               <span>Food</span>
             </Link>
@@ -16,7 +16,7 @@ export default function BottomNavBar() {
         </Nav.Link>
         <Nav.Link href="#pricing">
           <div className="bottom-nav-icon-title">
-            <Link to="/drinks">
+            <Link to="/products/drink">
               <i className="fas fa-cocktail"></i>
               <span>Drinks</span>
             </Link>

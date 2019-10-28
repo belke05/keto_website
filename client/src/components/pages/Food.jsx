@@ -15,10 +15,10 @@ export default function Food(props) {
   //   // </>
   // }
   return (
-    <div className="product-display">
+    <section className="product-display">
       {food.map((item, i) => {
         return <OneProduct product={item} key={i} />
       })}
-    </div>
+    </section>
   )
 }

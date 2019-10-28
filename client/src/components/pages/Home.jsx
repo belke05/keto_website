@@ -8,6 +8,7 @@ import BottomNavBar from '../sub-components/BottomNavBar'
 export default function Home(props) {
   const [{ user }, dispatch] = useUserValue()
   useEffect(() => {
+    document.querySelector('#nav').classList.add('bg-transparent')
     if (props.match.url === '/users' || props.match.url === '/home') {
       user_management
         .setSessionStorageUser()
@@ -33,7 +34,7 @@ export default function Home(props) {
       }}
     >
       <div className="jumbotron-wrapper">
-        <Jumbotron>
+        <Jumbotron className="jumbo">
           <h1>Deliciously healthy food and drinks!</h1>
           <p>
             We at Keto-Shop believe that the ketogenic diet is your way to a

@@ -15,9 +15,10 @@ export default function MainNavBar(props) {
       <Navbar
         collapseOnSelect
         expand="lg"
-        bg="transparant"
+        bg="transparent"
         variant="light"
         fixed="top"
+        id="nav"
       >
         <Link to="/">
           <Navbar.Brand
@@ -48,7 +49,7 @@ export default function MainNavBar(props) {
               <i class="fas fa-heart"></i>
             </Nav.Link>
             <Dropdown drop={'down'} alignRight={true}>
-              <Dropdown.Toggle>
+              <Dropdown.Toggle id="user-btn">
                 <i className="fa fa-user" aria-hidden="true"></i>
               </Dropdown.Toggle>
               {!user && (

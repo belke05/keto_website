@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
 import Food from './pages/Food'
-import Drink from './pages/Drink'
+import ProductDisplayPage from './pages/ProductDisplayPage'
 import MainNavBar from './sub-components/MainNavBar'
 import UserContextProvider from './contexts/UserContext'
 
@@ -37,8 +37,7 @@ export default function App() {
           <Route path="/users" component={Home} />
           <Route path="/register-login" exact component={Register} />
           <Route path="/profile" component={Profile} />
-          <Route path="/food" component={Food} />
-          <Route path="/drinks" component={Drink} />
+          <Route path="/products/:type" component={ProductDisplayPage} />
         </Switch>
       </UserContextProvider>
     </div>
