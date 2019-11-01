@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Jumbotron, Button } from 'react-bootstrap'
-import user_management from '../../api/user-management'
+import authentication from '../../api/authentication'
 import keto_background from '../../assets/images/keto_background.jpg'
 import { useUserValue } from '../contexts/UserContext'
 import BottomNavBar from '../sub-components/BottomNavBar'
@@ -10,7 +10,7 @@ export default function Home(props) {
   useEffect(() => {
     document.querySelector('#nav').classList.add('bg-transparent')
     if (props.match.url === '/users' || props.match.url === '/home') {
-      user_management
+      authentication
         .setSessionStorageUser()
         .then(savedUser => {
           dispatch({

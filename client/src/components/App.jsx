@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
-import Food from './pages/Food'
 import ProductDisplayPage from './pages/ProductDisplayPage'
 import MainNavBar from './sub-components/MainNavBar'
 import UserContextProvider from './contexts/UserContext'
@@ -21,6 +20,11 @@ export default function App() {
         return {
           ...state,
           user: action.noUser,
+        }
+      case 'changeFavourite':
+        return {
+          ...state,
+          user: { ...state['user'], favourites: action.favourites },
         }
       default:
         return state

@@ -3,26 +3,31 @@ import product_management from '../../api/product-management'
 import OneProduct from '../../components/sub-components/OneProduct'
 import FilterMenu from '../sub-components/FilterMenu'
 import { Pagination } from 'react-bootstrap'
+import { useUserValue } from '../contexts/UserContext'
 
 export default function ProductDisplay(props) {
   const [currentProducts, setCurrentProducts] = useState([])
   const [products, setProducts] = useState([])
+  const [userFavourites, setUserFavourites] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [filterState, setFilterState] = useState({
     sortPrice: { sortPriceAscending: false, sortPriceDescending: false },
     sortRating: { sortRatingAscending: false, sortRatingDescending: false },
     priceRange: [0, 100],
   })
+  const [{ user }, dispatch] = useUserValue()
   useEffect(() => {
+    if (user) setUserFavourites(user._favourites)
     product_management
       .getProducts(props.match.params.type)
       .then(foundProducts => {
-        // const productComponents = foundProducts.map(product => {
-        //   return <OneProduct product={product} />
-        // })
         setProducts(foundProducts)
         setCurrentProducts(foundProducts.slice(0, 9))
       })
+    changeStyling()
+  }, [])
+
+  function changeStyling() {
     const nav = document.querySelector('#nav')
     const icons = document.querySelectorAll('.fas')
     const user_icon = document.querySelector('#user-btn')
@@ -31,7 +36,7 @@ export default function ProductDisplay(props) {
     nav.classList.remove('bg-transparent')
     user_icon.style.backgroundColor = '#bc8c2a'
     user_icon.style.borderColor = '#bc8c2a'
-  }, [])
+  }
 
   function filter(product) {
     console.log(product, filterState.priceRange[0])
@@ -83,12 +88,11 @@ export default function ProductDisplay(props) {
       <div className="display_wrapper">
         <FilterMenu filterState={filterState} setFilterState={setFilterState} />
         <div className="product-display">
-          {/* {Products.filter(product => {
-        return globalFilter(product) ? <OneProduct product={product} /> : null
-      })} */}
           {currentProducts.map(product => {
             if (filter(product)) {
-              return <OneProduct product={product} />
+              return (
+                <OneProduct product={product} favourites={userFavourites} />
+              )
             } else {
               return false
             }

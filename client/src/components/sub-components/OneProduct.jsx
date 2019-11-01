@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react'
+import user_management from '../../api/user-management'
 
-export default function OneProduct({ product, children }) {
+export default function OneProduct({ product, children, favourites }) {
   let [reviewAmount, setReviewAmount] = useState(0)
   useEffect(() => {
     setReviewAmount(Math.floor(Math.random() * 20))
   }, [])
+
+  function handleHeartClick(e) {
+    const productId = e.target.dataset.productid
+    e.target.classList.toggle('red-heart')
+    user_management.addToFavourite(productId)
+    console.log(e.target)
+    console.log(e.target.dataset)
+  }
+
+  function handleCartClick(e) {}
+
   return (
     <div className="one-product">
       <img className="product-image" src={product.picture_url}></img>
@@ -110,7 +122,18 @@ export default function OneProduct({ product, children }) {
           </div>
           <div>
             <b>{product.price}, -</b>
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-shopping-cart" data-productId={product._id}></i>
+            {/* readable via the .dataset object */}
+            <i
+              class={
+                'fas fa-heart'
+                // favourites &&
+                // favourites.includes(product._id) &&
+                // 'fas fa-heart'
+              }
+              onClick={handleHeartClick}
+              data-productid={product._id}
+            ></i>
           </div>
         </div>
       </p>

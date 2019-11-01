@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import user_management from '../../api/user-management'
+import authentication from '../../api/authentication'
 import { useForm } from '../../hooks'
 import { useUserValue } from '../contexts/UserContext'
 import chalk from 'chalk'
@@ -13,7 +13,7 @@ export default function Login(props) {
   // we will use dispatch in this to set our user in the global state
   function handleSubmit(e) {
     e.preventDefault()
-    user_management
+    authentication
       .login(formValues.username, formValues.password)
       .then(logedInUser => {
         console.log(chalk.green('SUCCESS LOGIN!'))

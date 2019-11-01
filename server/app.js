@@ -59,7 +59,9 @@ app.use(
 require('./passport')(app)
 
 app.use('/product-management', require('./routes/products'))
-app.use('/user-management', require('./routes/auth'))
+app.use('/authentication', require('./routes/auth'))
+// app.use('/order-management', require('./routes/orders'))
+app.use('/user-management', require('./routes/user'))
 
 // For any routes that starts with "/api", catch 404 and forward to error handler
 app.use('/api/*', (req, res, next) => {

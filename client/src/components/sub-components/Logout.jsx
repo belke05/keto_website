@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import user_management from '../../api/user-management'
+import authentication from '../../api/authentication'
 import { useUserValue } from '../contexts/UserContext'
 
 export default function Logout() {
@@ -9,7 +9,7 @@ export default function Logout() {
       <button
         className="btn-logout"
         onClick={e => {
-          user_management.logout()
+          authentication.logout()
           dispatch({
             type: 'userLogout',
             noUser: null,

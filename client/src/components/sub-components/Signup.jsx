@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import Input from '@material-ui/core/Input'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import user_management from '../../api/user-management'
+import authentication from '../../api/authentication'
 import { NONAME } from 'dns'
 
 export default function Signup(props) {
@@ -37,7 +37,7 @@ export default function Signup(props) {
       first_name: state.first_name,
       last_name: state.last_name,
     }
-    user_management
+    authentication
       .register(data)
       .then(user => {
         console.log('signup success!')
