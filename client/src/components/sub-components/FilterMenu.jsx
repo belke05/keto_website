@@ -24,7 +24,7 @@ export default function FilterMenu({ filterState, setFilterState }) {
 
       <ReviewFilter />
 
-      <CategoryFilter />
+      <CategoryFilter setFilter={setFilterState} filterValues={filterState} />
     </section>
   )
 }

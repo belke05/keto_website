@@ -39,7 +39,7 @@ export default function Home(props) {
           <p>
             We at Keto-Shop believe that the ketogenic diet is your way to a
             healthier and balanced life. <br /> Without having to sacrifice
-            bacon.
+            bacon &#x1F953;
           </p>
           <p>
             <Button variant="primary" id="learn-more">

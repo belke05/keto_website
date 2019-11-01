@@ -42,8 +42,8 @@ svg:not(:root) {
   width: 1.6rem;
 }
 .icon-svg--color-blue {
-  fill: #32c3ff;
-  color: #32c3ff;
+  fill: #9dc1c6;
+  color: #9dc1c6;
 }
 .icon-svg--color-grey {
   fill: #dddddd;
@@ -77,6 +77,12 @@ h3,
 }
 
 .fa-shopping-cart {
+  margin: 5%;
+  color: $peru;
+}
+
+.fa-heart {
+  color: $brown;
 }
 
 .display_wrapper {
@@ -84,7 +90,7 @@ h3,
   grid-template-columns: repeat(6, 1fr);
   grid-auto-rows: 1fr;
   grid-template-areas: 'sd  main main main main main';
-  margin-top: 6%;
+  padding-top: 70px;
 }
 
 .filter-nav {
@@ -113,7 +119,7 @@ h3,
 }
 
 .MuiSlider-root {
-  color: #0090e3 !important;
+  color: $peru !important;
 }
 
 .label-title {

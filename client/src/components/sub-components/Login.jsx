@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import authentication from '../../api/authentication'
 import { useForm } from '../../hooks'
 import { useUserValue } from '../contexts/UserContext'
-import chalk from 'chalk'
 
 export default function Login(props) {
   const { formValues, getInputProps } = useForm({
@@ -16,7 +15,7 @@ export default function Login(props) {
     authentication
       .login(formValues.username, formValues.password)
       .then(logedInUser => {
-        console.log(chalk.green('SUCCESS LOGIN!'))
+        console.log('SUCCESS LOGIN!')
         dispatch({
           type: 'userLogin',
           newUser: logedInUser,

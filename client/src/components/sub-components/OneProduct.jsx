@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import user_management from '../../api/user-management'
-import authentication from '../../api/authentication'
 
 export default function OneProduct({ product, setUserFavourites, favourites }) {
   let [reviewAmount, setReviewAmount] = useState(0)

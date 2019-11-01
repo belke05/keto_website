@@ -14,6 +14,7 @@ export default function ProductDisplay(props) {
     sortPrice: { sortPriceAscending: false, sortPriceDescending: false },
     sortRating: { sortRatingAscending: false, sortRatingDescending: false },
     priceRange: [0, 100],
+    categoriesToKeep: {},
   })
   const [{ user }, dispatch] = useUserValue()
   useEffect(() => {
@@ -46,6 +47,29 @@ export default function ProductDisplay(props) {
     ) {
       return true
     }
+    return false
+  }
+
+  function categoryFilter(product) {
+    let check = []
+    // if (check.length == 0) return true
+    if (filterState.categoriesToKeep.checkedVegan) check.push('vegan')
+    if (filterState.categoriesToKeep.checkedTea) check.push('tea')
+    if (filterState.categoriesToKeep.checkedKombucha) check.push('kombucha')
+    let truthChecker = false
+    check.forEach(checky => {
+      if (
+        product.name.toLowerCase().includes(checky) ||
+        product.tags
+          .join('')
+          .toLowerCase()
+          .includes(checky)
+      ) {
+        truthChecker = true
+        return
+      }
+    })
+    if (check.length == 0 || truthChecker) return true
     return false
   }
 
@@ -89,7 +113,7 @@ export default function ProductDisplay(props) {
         <FilterMenu filterState={filterState} setFilterState={setFilterState} />
         <div className="product-display">
           {currentProducts.map(product => {
-            if (filter(product)) {
+            if (filter(product) && categoryFilter(product)) {
               return (
                 <OneProduct
                   key={product._id}

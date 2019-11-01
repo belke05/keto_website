@@ -37,6 +37,16 @@ export default {
       .catch(errHandler)
   },
 
+  getQueriesProducts(productIds) {
+    return service
+      .get(`/favourite_products/${productIds}`)
+      .then(res => {
+        const userFavourites = res.data
+        return userFavourites
+      })
+      .catch(errHandler)
+  },
+
   addProduct(body) {
     return service
       .post('/products', body)

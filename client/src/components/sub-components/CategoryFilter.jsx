@@ -23,19 +23,24 @@ const BlueCheckBox = withStyles({
 const FormGroupWithStyle = withStyles({
   root: {
     paddingBottom: '10%',
+    borderColor: 'red',
   },
 })(props => <FormGroup row>{props.children}</FormGroup>)
 
-export default function CategoryFilter() {
+export default function CategoryFilter(props) {
   const [state, setState] = React.useState({
-    checkedVegan: true,
-    checkedKombucha: true,
-    checkedSugarFree: true,
-    checkedTea: true,
+    checkedVegan: false,
+    checkedKombucha: false,
+    checkedSugarFree: false,
+    checkedTea: false,
   })
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked })
+    props.setFilter({
+      ...props.filterValues,
+      categoriesToKeep: { ...state, [name]: event.target.checked },
+    })
   }
 
   return (

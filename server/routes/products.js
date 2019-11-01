@@ -14,6 +14,22 @@ router.get('/products/:category', (req, res, next) => {
     .catch(err => console.log(err))
 })
 
+// get all favourite products
+router.get('/favourite_products/:productids', (req, res, next) => {
+  const ids_to_find = req.params.productids.split('_')
+  console.log(ids_to_find, 'fhfhfh')
+  Product.find({
+    _id: { $in: ids_to_find },
+  })
+    .then(favouriteProducts => {
+      console.log('found products', res)
+      res.send(favouriteProducts)
+    })
+    .catch(err => {
+      console.log('error getting favourites', err)
+    })
+})
+
 // get a single product
 router.get('/products/:productId', (req, res, next) => {
   console.log('here')
