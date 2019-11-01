@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import user_management from '../../api/user-management'
+import authentication from '../../api/authentication'
 
-export default function OneProduct({ product, children, favourites }) {
+export default function OneProduct({ product, setUserFavourites, favourites }) {
   let [reviewAmount, setReviewAmount] = useState(0)
   useEffect(() => {
     setReviewAmount(Math.floor(Math.random() * 20))
@@ -9,19 +10,48 @@ export default function OneProduct({ product, children, favourites }) {
 
   function handleHeartClick(e) {
     const productId = e.target.dataset.productid
-    e.target.classList.toggle('red-heart')
-    user_management.addToFavourite(productId)
-    console.log(e.target)
-    console.log(e.target.dataset)
+    if (favourites) {
+      e.target.classList.toggle('red-heart')
+      if (favourites.includes(productId)) {
+        user_management
+          .deleteFromFavourite(productId)
+          .then(updatedFavourites => {
+            console.log(
+              'the returned updated favourites are',
+              updatedFavourites
+            )
+            setUserFavourites(updatedFavourites)
+          })
+      } else {
+        user_management.addToFavourite(productId).then(updatedFavourites => {
+          console.log('the returned updated favourites are', updatedFavourites)
+          setUserFavourites(updatedFavourites)
+        })
+      }
+    } else {
+      e.target.classList.remove('heart-notification')
+      void e.target.offsetWidth
+      // -> triggering reflow /* The actual magic */
+      // without this it wouldn't work.
+      e.target.classList.add('heart-notification')
+    }
+  }
+
+  function isFavourite() {
+    return favourites.includes(product._id) ? true : false
   }
 
   function handleCartClick(e) {}
+
+  const wrap = (s, w) => s.replace(/(?![^\n]{1,20}$)([^\n]{1,20})\s/g, '$1\n')
 
   return (
     <div className="one-product">
       <img className="product-image" src={product.picture_url}></img>
       <figcaption className="product-card__title">
-        <h3>{product.name}</h3>
+        <h3>
+          <pre>{wrap(product.name)}</pre>
+        </h3>
       </figcaption>
       <p>
         <div>
@@ -126,7 +156,7 @@ export default function OneProduct({ product, children, favourites }) {
             {/* readable via the .dataset object */}
             <i
               class={
-                'fas fa-heart'
+                (isFavourite() && 'fas fa-heart red-heart') || 'fas fa-heart'
                 // favourites &&
                 // favourites.includes(product._id) &&
                 // 'fas fa-heart'

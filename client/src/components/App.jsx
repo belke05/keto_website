@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
+import Favourites from './pages/Favourites'
 import ProductDisplayPage from './pages/ProductDisplayPage'
 import MainNavBar from './sub-components/MainNavBar'
 import UserContextProvider from './contexts/UserContext'
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/users" component={Home} />
           <Route path="/register-login" exact component={Register} />
           <Route path="/profile" component={Profile} />
+          <Route path="/favourites" component={Favourites} />
           <Route path="/products/:type" component={ProductDisplayPage} />
         </Switch>
       </UserContextProvider>

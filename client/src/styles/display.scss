@@ -5,6 +5,10 @@
 }
 
 .one-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .stars {
@@ -131,4 +135,24 @@ h3,
 
 .red-heart {
   color: red;
+}
+
+.heart-notification::after {
+  animation: notify 3s linear 1 alternate;
+  content: '';
+  color: 'blue';
+}
+
+pre {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes notify {
+  0% {
+    content: 'login or signup';
+  }
+
+  100% {
+    content: '';
+  }
 }

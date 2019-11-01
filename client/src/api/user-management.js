@@ -26,14 +26,20 @@ export default {
   addToFavourite(productId) {
     return service
       .post(`/favourites/${productId}`)
-      .then(res => res.data)
+      .then(res => {
+        const updatedFavourites = res.data
+        return updatedFavourites
+      })
       .catch(errHandler)
   },
 
-  removeFromFavourite(productId) {
+  deleteFromFavourite(productId) {
     return service
       .delete(`/favourites/${productId}`)
-      .then(res => res.data)
+      .then(res => {
+        const updatedFavourites = res.data
+        return updatedFavourites
+      })
       .catch(errHandler)
   },
 

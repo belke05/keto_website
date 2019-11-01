@@ -91,7 +91,12 @@ export default function ProductDisplay(props) {
           {currentProducts.map(product => {
             if (filter(product)) {
               return (
-                <OneProduct product={product} favourites={userFavourites} />
+                <OneProduct
+                  key={product._id}
+                  product={product}
+                  favourites={userFavourites}
+                  setUserFavourites={setUserFavourites}
+                />
               )
             } else {
               return false

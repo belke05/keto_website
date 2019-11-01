@@ -43,10 +43,14 @@ export default function MainNavBar(props) {
               </Nav.Link>
             )}
             <Nav.Link eventKey={2} href="#memes">
-              <i class="fas fa-shopping-cart"></i>
+              <Link to="/shopping-cart">
+                <i class="fas fa-shopping-cart"></i>
+              </Link>
             </Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              <i class="fas fa-heart"></i>
+            <Nav.Link eventKey={2} href="#">
+              <Link to="/favourites">
+                <i class="fas fa-heart"></i>
+              </Link>
             </Nav.Link>
             <Dropdown drop={'down'} alignRight={true}>
               <Dropdown.Toggle id="user-btn">
