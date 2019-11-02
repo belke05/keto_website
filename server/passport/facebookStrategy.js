@@ -2,7 +2,6 @@ const FacebookStrategy = require('passport-facebook')
 const passport = require('passport')
 const User = require('../models/User')
 const chalk = require('chalk')
-const { FACEBOOK } = require('../../config')
 
 passport.use(
   new FacebookStrategy(
