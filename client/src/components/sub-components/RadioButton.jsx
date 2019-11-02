@@ -68,7 +68,22 @@ function StyledRadio(props) {
   )
 }
 
-export default function CustomizedRadios() {
+export default function CustomizedRadios(props) {
+  function handleClick(e) {
+    const reviewminimum = Number(e.target.value)
+    if (props.filterValues.sortRating !== reviewminimum) {
+      props.setFilter({
+        ...props.filterValues,
+        sortRating: reviewminimum,
+      })
+      return
+    }
+    props.setFilter({
+      ...props.filterValues,
+      sortRating: null,
+    })
+  }
+
   return (
     <div class="space">
       <FormControl component="fieldset">
@@ -85,6 +100,7 @@ export default function CustomizedRadios() {
               value="5"
               control={<StyledRadio />}
               label="5 and more"
+              onClick={handleClick}
             />
             <div class="review-stars__icon">
               <svg
@@ -167,6 +183,7 @@ export default function CustomizedRadios() {
               value="4"
               control={<StyledRadio />}
               label="4 and more"
+              onClick={handleClick}
             />
             <div class="review-stars__icon">
               <svg
@@ -249,6 +266,7 @@ export default function CustomizedRadios() {
               value="3"
               control={<StyledRadio />}
               label="3 and more"
+              onClick={handleClick}
             />
             <div class="review-stars__icon">
               <svg
@@ -331,6 +349,7 @@ export default function CustomizedRadios() {
               value="2"
               control={<StyledRadio />}
               label="2 and more"
+              onClick={handleClick}
             />
             <div class="review-stars__icon">
               <svg
@@ -413,6 +432,7 @@ export default function CustomizedRadios() {
               value="1"
               control={<StyledRadio />}
               label="1 and more"
+              onClick={handleClick}
             />
             <div class="review-stars__icon">
               <svg

@@ -12,10 +12,11 @@ export default function ProductDisplay(props) {
   const [currentPage, setCurrentPage] = useState(1)
   const [filterState, setFilterState] = useState({
     sortPrice: { sortPriceAscending: false, sortPriceDescending: false },
-    sortRating: { sortRatingAscending: false, sortRatingDescending: false },
-    priceRange: [0, 100],
+    sortRating: null,
+    priceRange: [0, 50],
     categoriesToKeep: {},
   })
+
   const [{ user }, dispatch] = useUserValue()
   useEffect(() => {
     if (user) setUserFavourites(user._favourites)
@@ -48,6 +49,13 @@ export default function ProductDisplay(props) {
       return true
     }
     return false
+  }
+
+  function ratingFilter(product) {
+    if (filterState.sortRating) {
+      return product.rating >= filterState.sortRating ? true : false
+    }
+    return true
   }
 
   function categoryFilter(product) {
@@ -110,10 +118,18 @@ export default function ProductDisplay(props) {
   return (
     <>
       <div className="display_wrapper">
-        <FilterMenu filterState={filterState} setFilterState={setFilterState} />
+        <FilterMenu
+          filterState={filterState}
+          setFilterState={setFilterState}
+          displayCategory={props.match.params.type}
+        />
         <div className="product-display">
           {currentProducts.map(product => {
-            if (filter(product) && categoryFilter(product)) {
+            if (
+              filter(product) &&
+              categoryFilter(product) &&
+              ratingFilter(product)
+            ) {
               return (
                 <OneProduct
                   key={product._id}
