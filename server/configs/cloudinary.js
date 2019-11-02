@@ -6,7 +6,7 @@ const multer = require('multer')
 // multer allows form data to be available and creates
 // a req.file object
 
-cloudinary.({
+cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
