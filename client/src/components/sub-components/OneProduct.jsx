@@ -1,43 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import user_management from '../../api/user-management'
+import { useUserValue } from '../contexts/UserContext'
 
-export default function OneProduct({ product, setUserFavourites, favourites }) {
+export default function OneProduct({ product }) {
+  const [{ user }, dispatch] = useUserValue()
   let [reviewAmount, setReviewAmount] = useState(0)
   useEffect(() => {
     setReviewAmount(Math.floor(Math.random() * 20))
   }, [])
 
   function handleHeartClick(e) {
-    const productId = e.target.dataset.productid
-    if (favourites) {
-      e.target.classList.toggle('red-heart')
+    try {
+      const productId = e.target.dataset.productid
+      const favourites = user._favourites
       if (favourites.includes(productId)) {
         user_management
           .deleteFromFavourite(productId)
           .then(updatedFavourites => {
-            console.log(
-              'the returned updated favourites are',
-              updatedFavourites
-            )
-            setUserFavourites(updatedFavourites)
+            dispatch({
+              type: 'changeFavourite',
+              favourites: updatedFavourites,
+            })
           })
       } else {
         user_management.addToFavourite(productId).then(updatedFavourites => {
-          console.log('the returned updated favourites are', updatedFavourites)
-          setUserFavourites(updatedFavourites)
+          dispatch({
+            type: 'changeFavourite',
+            favourites: updatedFavourites,
+          })
         })
       }
-    } else {
-      e.target.classList.remove('heart-notification')
-      void e.target.offsetWidth
-      // -> triggering reflow /* The actual magic */
-      // without this it wouldn't work.
-      e.target.classList.add('heart-notification')
+      e.target.classList.toggle('red-heart')
+    } catch (error) {
+      if (error instanceof TypeError) {
+        e.target.classList.remove('heart-notification')
+        void e.target.offsetWidth
+        e.target.classList.add('heart-notification')
+        // -> triggering reflow /* The actual magic */
+        // without this it wouldn't work.
+      }
     }
-  }
-
-  function isFavourite() {
-    return favourites.includes(product._id) ? true : false
   }
 
   function handleCartClick(e) {}
@@ -144,10 +146,7 @@ export default function OneProduct({ product, setUserFavourites, favourites }) {
               </svg>
             </div>
 
-            <span>
-              {reviewAmount}
-              reviews
-            </span>
+            <div className="reviewers">{reviewAmount} reviews</div>
           </div>
           <div>
             <b>{product.price}, -</b>
@@ -155,7 +154,10 @@ export default function OneProduct({ product, setUserFavourites, favourites }) {
             {/* readable via the .dataset object */}
             <i
               class={
-                (isFavourite() && 'fas fa-heart red-heart') || 'fas fa-heart'
+                (user &&
+                  user._favourites.includes(product._id) &&
+                  'fas fa-heart red-heart') ||
+                'fas fa-heart'
                 // favourites &&
                 // favourites.includes(product._id) &&
                 // 'fas fa-heart'

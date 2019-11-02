@@ -5,7 +5,7 @@ import Slider from '@material-ui/core/Slider'
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: '50%',
     color: '#9dc1c6',
     paddingBottom: '10%',
   },
@@ -17,7 +17,7 @@ function valuetext(value) {
 
 export default function RangeSlider({ setFilter, filterValues }) {
   const classes = useStyles()
-  const [value, setValue] = React.useState([0, 100])
+  const [value, setValue] = React.useState([0, 50])
 
   const handleChange = (event, newValue) => {
     setValue(newValue)

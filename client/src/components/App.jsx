@@ -25,7 +25,7 @@ export default function App() {
       case 'changeFavourite':
         return {
           ...state,
-          user: { ...state['user'], favourites: action.favourites },
+          user: { ...state.user, _favourites: action.favourites },
         }
       default:
         return state

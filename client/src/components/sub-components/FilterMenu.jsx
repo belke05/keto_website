@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import RangeSlider from '../sub-components/Sliders'
 import ReviewFilter from '../sub-components/RadioButton'
 import CategoryFilter from '../sub-components/CategoryFilter'
@@ -21,9 +21,7 @@ export default function FilterMenu({ filterState, setFilterState }) {
         filterValues={filterState}
         className="space-top"
       />
-
       <ReviewFilter />
-
       <CategoryFilter setFilter={setFilterState} filterValues={filterState} />
     </section>
   )

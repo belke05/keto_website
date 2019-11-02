@@ -8,7 +8,7 @@ import { useUserValue } from '../contexts/UserContext'
 export default function ProductDisplay(props) {
   const [currentProducts, setCurrentProducts] = useState([])
   const [products, setProducts] = useState([])
-  const [userFavourites, setUserFavourites] = useState([])
+  const [userFavourites, setUserFavourites] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
   const [filterState, setFilterState] = useState({
     sortPrice: { sortPriceAscending: false, sortPriceDescending: false },

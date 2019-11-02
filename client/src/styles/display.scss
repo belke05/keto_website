@@ -153,6 +153,11 @@ pre {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.reviewers {
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+
 @keyframes notify {
   0% {
     content: 'login or signup';
