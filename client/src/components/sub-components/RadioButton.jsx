@@ -510,6 +510,14 @@ export default function CustomizedRadios(props) {
               </svg>
             </div>
           </div>
+          <div>
+            <FormControlLabel
+              value="0"
+              control={<StyledRadio />}
+              label="clear filter"
+              onClick={handleClick}
+            />
+          </div>
         </RadioGroup>
       </FormControl>
     </div>

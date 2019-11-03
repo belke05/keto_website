@@ -9,113 +9,113 @@ const Product = require('../models/Product')
 
 require('../configs/database')
 
-// const queryWords = [
-//   'low carb',
-//   'no sugar drink',
-//   'nuts',
-//   'avocado',
-//   'keto mix',
-//   'paleo',
-//   'low carb snack',
-//   'paleo snack',
-//   'protein snack',
-//   'kombucha',
-//   'protein chips',
-//   'superfood protein',
-//   'protein bar',
-//   'hemp seeds',
-//   'protein based',
-//   'supplements',
-//   'muscle',
-//   'organic protein',
-//   'vegan drink',
-//   'organic drink',
-//   'healthy snack',
-// ]
+const queryWords = [
+  'low carb',
+  'no sugar drink',
+  'nuts',
+  'avocado',
+  'keto mix',
+  'paleo',
+  'low carb snack',
+  'paleo snack',
+  'protein snack',
+  'kombucha',
+  'protein chips',
+  'superfood protein',
+  'protein bar',
+  'hemp seeds',
+  'protein based',
+  'supplements',
+  'muscle',
+  'organic protein',
+  'vegan drink',
+  'organic drink',
+  'healthy snack',
+]
 
-// queryOnWords(queryWords)
+queryOnWords(queryWords)
 
-// function queryOnWords(queryInputs) {
-//   const max_carbs = 10
-//   let i = 0
-//   let allProducts = []
-//   queryInputs.forEach(query => {
-//     axios
-//       .get(
-//         `https://api.spoonacular.com/food/products/search?query=${query}&maxCarbs=${max_carbs}&apiKey=${process.env.SPOON_KEY}`
-//       )
-//       .then(res => {
-//         console.log('first word queried', res.data.products)
-//         i++
-//         allProducts.push(...res.data.products)
-//         // if we have all query responses
-//         if (i == queryInputs.length) {
-//           console.log('start query by id for all products', allProducts)
-//           queryById(allProducts)
-//         }
-//       })
-//   })
-// }
+function queryOnWords(queryInputs) {
+  const max_carbs = 10
+  let i = 0
+  let allProducts = []
+  queryInputs.forEach(query => {
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/search?query=${query}&maxCarbs=${max_carbs}&apiKey=${process.env.SPOON_KEY}`
+      )
+      .then(res => {
+        console.log('first word queried', res.data.products)
+        i++
+        allProducts.push(...res.data.products)
+        // if we have all query responses
+        if (i == queryInputs.length) {
+          console.log('start query by id for all products', allProducts)
+          queryById(allProducts)
+        }
+      })
+  })
+}
 
-// function queryById(foundProducts) {
-//   let productsToSeed = []
-//   foundProducts.forEach(product => {
-//     console.log(product)
-//     axios
-//       .get(
-//         `https://api.spoonacular.com/food/products/${product.id}?apiKey=${process.env.SPOON_KEY}`
-//       )
-//       .then(res => {
-//         const foundProduct = res.data
-//         productsToSeed.push(foundProduct)
-//         console.log('queried one product')
-//         if (productsToSeed.length === foundProducts.length) {
-//           console.log('start formatting', productsToSeed)
-//           formatResults(productsToSeed)
-//         }
-//       })
-//       .catch(err => {
-//         console.log(err, productsToSeed)
-//         throw new Error('stop this madness')
-//       })
-//   })
-// }
+function queryById(foundProducts) {
+  let productsToSeed = []
+  foundProducts.forEach(product => {
+    console.log(product)
+    axios
+      .get(
+        `https://api.spoonacular.com/food/products/${product.id}?apiKey=${process.env.SPOON_KEY}`
+      )
+      .then(res => {
+        const foundProduct = res.data
+        productsToSeed.push(foundProduct)
+        console.log('queried one product')
+        if (productsToSeed.length === foundProducts.length) {
+          console.log('start formatting', productsToSeed)
+          formatResults(productsToSeed)
+        }
+      })
+      .catch(err => {
+        console.log(err, productsToSeed)
+        throw new Error('stop this madness')
+      })
+  })
+}
 
-// function formatResults(foundProducts) {
-//   let products_to_seed = []
-//   let non_empty_seeds
-//   foundProducts.forEach(product => {
-//     let seed_product = {
-//       name: product.title,
-//       description: product.generatedText,
-//       ingredients: product.ingredientList.split(';'),
-//       nutritional_value: {
-//         calories: product.nutrition.calories,
-//         fat: product.nutrition.fat,
-//         protein: product.nutrition.protein,
-//         carbs: product.nutrition.carbs,
-//       },
-//       category: product.breadcrumbs.includes('drink') ? 'drink' : 'food',
-//       tags: product.badges,
-//       picture_url: product.images[1] ? product.images[1] : product.images[0],
-//       price: product.price == 0 ? Math.floor(Math.random() * 6) : product.price,
-//       rating: Math.floor(Math.random() * 5),
-//       sales: Math.floor(Math.random() * 5),
-//     }
-//     products_to_seed.push(seed_product)
-//   })
-//   non_empty_seeds = products_to_seed.filter(
-//     value => JSON.stringify(value) !== '{}'
-//   )
-//   deleteAllThenInsertAll(non_empty_seeds)
-// }
+function formatResults(foundProducts) {
+  let products_to_seed = []
+  let non_empty_seeds
+  foundProducts.forEach(product => {
+    let seed_product = {
+      name: product.title,
+      description: product.generatedText,
+      ingredients: product.ingredientList.split(';'),
+      nutritional_value: {
+        calories: product.nutrition.calories,
+        fat: product.nutrition.fat,
+        protein: product.nutrition.protein,
+        carbs: product.nutrition.carbs,
+      },
+      category: product.breadcrumbs.includes('drink') ? 'drink' : 'food',
+      tags: product.badges,
+      picture_url: product.images[1] ? product.images[1] : product.images[0],
+      price: product.price == 0 ? Math.floor(Math.random() * 6) : product.price,
+      rating: Math.floor(Math.random() * 5),
+      sales: Math.floor(Math.random() * 5),
+    }
+    products_to_seed.push(seed_product)
+  })
+  non_empty_seeds = products_to_seed.filter(
+    value => JSON.stringify(value) !== '{}'
+  )
+  deleteAllThenInsertAll(non_empty_seeds)
+}
 
-// async function deleteAllThenInsertAll(seeds) {
-//   await Product.deleteMany()
-//   await Product.insertMany(seeds)
-//   mongoose.disconnect()
-//   return console.log('database was fed')
-// }
+async function deleteAllThenInsertAll(seeds) {
+  await Product.deleteMany()
+  await Product.insertMany(seeds)
+  mongoose.disconnect()
+  return console.log('database was fed')
+}
 
 function randomizeprice() {
   Product.find({}).then(products => {

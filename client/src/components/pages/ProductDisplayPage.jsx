@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import product_management from '../../api/product-management'
 import OneProduct from '../../components/sub-components/OneProduct'
 import FilterMenu from '../sub-components/FilterMenu'
-import { Pagination } from 'react-bootstrap'
 import { useUserValue } from '../contexts/UserContext'
 
 export default function ProductDisplay(props) {
-  const [currentProducts, setCurrentProducts] = useState([])
+  const [{ user }, dispatch] = useUserValue()
   const [products, setProducts] = useState([])
   const [userFavourites, setUserFavourites] = useState(null)
-  const [currentPage, setCurrentPage] = useState(1)
   const [filterState, setFilterState] = useState({
     sortPrice: { sortPriceAscending: false, sortPriceDescending: false },
     sortRating: null,
@@ -17,14 +15,12 @@ export default function ProductDisplay(props) {
     categoriesToKeep: {},
   })
 
-  const [{ user }, dispatch] = useUserValue()
   useEffect(() => {
     if (user) setUserFavourites(user._favourites)
     product_management
       .getProducts(props.match.params.type)
       .then(foundProducts => {
         setProducts(foundProducts)
-        setCurrentProducts(foundProducts.slice(0, 9))
       })
     changeStyling()
   }, [])
@@ -81,40 +77,6 @@ export default function ProductDisplay(props) {
     return false
   }
 
-  function renderPaginationItems() {
-    let items = []
-    let count = 0
-    for (let number = 0; number <= products.length / 9; number++) {
-      count++
-      items.push(
-        <Pagination.Item
-          key={count}
-          active={currentPage === count}
-          onClick={e => {
-            console.log(e.target.text, products)
-            const page_num = Number(e.target.text)
-            setCurrentPage(Number(page_num))
-            console.log(
-              'page num',
-              page_num,
-              'current products',
-              products.slice(page_num - 1 * 9, page_num * 9)
-            )
-            const prods = [...products]
-            const current_products = prods.slice(
-              (page_num - 1) * 9,
-              page_num * 9
-            )
-            setCurrentProducts(current_products)
-          }}
-        >
-          {count}
-        </Pagination.Item>
-      )
-    }
-    return items
-  }
-
   return (
     <>
       <div className="display_wrapper">
@@ -124,7 +86,7 @@ export default function ProductDisplay(props) {
           displayCategory={props.match.params.type}
         />
         <div className="product-display">
-          {currentProducts.map(product => {
+          {products.map(product => {
             if (
               filter(product) &&
               categoryFilter(product) &&
@@ -143,11 +105,6 @@ export default function ProductDisplay(props) {
             }
           })}
         </div>
-      </div>
-      <div>
-        <Pagination>
-          {products.length && renderPaginationItems().map(item => item)}
-        </Pagination>
       </div>
     </>
   )
